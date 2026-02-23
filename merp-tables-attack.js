@@ -191,7 +191,7 @@ MERP.AT7 = [
     [76, 80, "8A", 7, "7A", "6B", "12B"],
     [81, 85, "8A", "8A", "7A", "7B", "13B"],
     [86, 90, "9A", "9B", "8B", "8B", "14B"],
-    [91, 95, "9A", "9B", "10B", "15C"],
+    [91, 95, "9A", "9B", "10B", "10B", "15C"],
     [96, 100, "10A", "10B", "11B", "12C", "16C"],
     [101, 105, "10B", "12C", "12C", "14C", "18C"],
     [106, 110, "11B", "12C", "13C", "16C", "20C"],
@@ -283,6 +283,10 @@ MERP.lookupAttackTable = function(tableName, roll, armorIndex) {
     if (roll > table[table.length - 1][1]) {
         const lastRow = table[table.length - 1];
         return MERP.parseAttackResult(lastRow[armorIndex + 2]);
+    }
+    // If roll is below table minimum (e.g., extreme low open-ended), use first row
+    if (roll < table[0][0]) {
+        return MERP.parseAttackResult(table[0][armorIndex + 2]);
     }
     return { hits: 0, crit: null, fumble: false };
 };

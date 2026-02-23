@@ -819,6 +819,140 @@ input[type="checkbox"] {
     font-family: var(--font-heading);
 }
 
+/* ── Battle Attack Panel ── */
+
+.battle-attack-card {
+    border-color: var(--border-gold);
+    background: linear-gradient(180deg, var(--bg-card) 0%, #2a221a 100%);
+}
+
+.battle-attack-result {
+    margin-top: 12px;
+    padding: 12px;
+    background: var(--bg-panel);
+    border: 2px solid var(--border-light);
+    border-radius: 6px;
+}
+
+.battle-attack-result.crit {
+    border-color: var(--text-heading);
+    box-shadow: 0 0 8px rgba(212, 168, 71, 0.3);
+}
+
+.battle-attack-result.fumble {
+    border-color: #8040a0;
+    box-shadow: 0 0 8px rgba(128, 64, 160, 0.3);
+}
+
+.battle-attack-result.spell-effect {
+    border-color: var(--accent-red);
+    box-shadow: 0 0 8px rgba(200, 60, 60, 0.3);
+}
+
+/* ── Weapon/Spell Mode Toggle ── */
+
+.battle-atk-toggle {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.battle-atk-mode-btn {
+    background: var(--bg-input);
+    color: var(--text-secondary);
+    border: none;
+    padding: 4px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-main);
+}
+
+.battle-atk-mode-btn:first-child {
+    border-right: 1px solid var(--border-light);
+}
+
+.battle-atk-mode-btn:hover {
+    background: var(--bg-card);
+    color: var(--text-primary);
+}
+
+.battle-atk-mode-btn.active {
+    background: linear-gradient(180deg, #5a4a2e 0%, #3a2e1a 100%);
+    color: var(--text-heading);
+    font-weight: bold;
+}
+
+/* ── Parry Slider ── */
+
+.battle-parry-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+}
+
+.battle-parry-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.battle-parry-minmax {
+    font-size: 11px;
+    color: var(--text-secondary);
+    min-width: 20px;
+    text-align: center;
+    font-family: var(--font-heading);
+}
+
+.battle-parry-slider {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+}
+
+.battle-parry-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #7a6a3e 0%, #5a4a2e 100%);
+    border: 2px solid var(--border-gold);
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+.battle-parry-slider::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 6px rgba(212, 168, 71, 0.5);
+}
+
+.battle-parry-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #7a6a3e 0%, #5a4a2e 100%);
+    border: 2px solid var(--border-gold);
+    cursor: pointer;
+}
+
+.battle-parry-values {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
 /* ── Level History ── */
 
 .level-history-entry {
