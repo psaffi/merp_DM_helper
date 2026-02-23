@@ -619,11 +619,11 @@ MERP.getAttackSpells = function(profession) {
 };
 
 // ============================================================
-// NPC / CREATURE TEMPLATES (from ST-2)
+// NPC / CREATURE TEMPLATES (from ICE2012 Creatures of Middle-earth)
 // ============================================================
 MERP.npcTemplates = {
     // ============================================================
-    // COMMON NPCs (humanoid)
+    // ORCS & EVIL HUMANOIDS
     // ============================================================
     "Orc, Weak":          { level: 1, hits: 35, armor: "No Armor", db: 25, ob: 35, attackType: "Weapon", critType: "Regular", size: "Medium", attackDesc: "35We" },
     "Orc, Medium":        { level: 3, hits: 60, armor: "Rigid Leather", db: 30, ob: 60, attackType: "Weapon", critType: "Regular", size: "Medium", attackDesc: "60We" },
@@ -632,50 +632,6 @@ MERP.npcTemplates = {
     "Olog-hai":           { level: 10, hits: 150, armor: "Plate", db: 45, ob: 160, attackType: "Weapon", critType: "Large", size: "Large", attackDesc: "160We" },
     "Half-orc":           { level: 4, hits: 70, armor: "Rigid Leather", db: 25, ob: 60, attackType: "Weapon", critType: "Regular", size: "Medium", attackDesc: "60Bi" },
     "Half-troll":         { level: 7, hits: 120, armor: "Chain", db: 30, ob: 90, attackType: "Weapon", critType: "Large", size: "Large", attackDesc: "90Gr" },
-
-    // ============================================================
-    // SPECIAL TOLKIEN MONSTERS
-    // ============================================================
-    "Troll":              { level: 12, hits: 180, armor: "Rigid Leather", db: 35, ob: 150, attackType: "Crush", critType: "Large", size: "Huge", attackDesc: "150Cl" },
-    "Wild Troll":         { level: 10, hits: 140, armor: "Soft Leather", db: 30, ob: 120, attackType: "Crush", critType: "Large", size: "Large", attackDesc: "120Cl" },
-    "Warg":               { level: 8, hits: 150, armor: "No Armor", db: 55, ob: 90, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "90Bi" },
-    "Fell Beast":         { level: 20, hits: 210, armor: "Chain", db: 35, ob: 95, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "95Bi*" },
-    "Nazgul":             { level: 20, hits: 200, armor: "Chain", db: 75, ob: 175, attackType: "Weapon/Spell", critType: "Huge", size: "Medium", attackDesc: "175We*" },
-    "Balrog":             { level: 60, hits: 400, armor: "Plate", db: 60, ob: 240, attackType: "Weapon/Spell", critType: "Huge", size: "Huge", attackDesc: "240We*" },
-    "Dragon":             { level: 25, hits: 260, armor: "Plate", db: 40, ob: 175, attackType: "Bite/Claw", critType: "Huge", size: "Huge", attackDesc: "175Bi*" },
-    "Giant":              { level: 20, hits: 350, armor: "Rigid Leather", db: 30, ob: 140, attackType: "Crush", critType: "Huge", size: "Huge", attackDesc: "140Ra*" },
-    "Huorn":              { level: 20, hits: 350, armor: "Chain", db: 20, ob: 75, attackType: "Crush", critType: "Large", size: "Huge", attackDesc: "75Pi" },
-    "Ent (Onodrim)":      { level: 35, hits: 400, armor: "Plate", db: 30, ob: 170, attackType: "Crush", critType: "Huge", size: "Huge", attackDesc: "170Fa*" },
-    "Mumakil":            { level: 7, hits: 300, armor: "Rigid Leather", db: 25, ob: 85, attackType: "Crush", critType: "Large", size: "Huge", attackDesc: "85Ra" },
-    "Kraken, Small":      { level: 15, hits: 150, armor: "No Armor", db: 50, ob: 75, attackType: "Grapple", critType: "Medium", size: "Medium", attackDesc: "75Gr*" },
-    "Kraken, Large":      { level: 35, hits: 400, armor: "Rigid Leather", db: 40, ob: 150, attackType: "Grapple", critType: "Huge", size: "Huge", attackDesc: "150Gr*" },
-    "Mewlip":             { level: 4, hits: 60, armor: "No Armor", db: 35, ob: 55, attackType: "Weapon", critType: "Regular", size: "Medium", attackDesc: "55We" },
-    "Spider, Great":      { level: 5, hits: 50, armor: "Chain", db: 20, ob: 60, attackType: "Sting", critType: "Medium", size: "Medium", attackDesc: "60Pi*" },
-    "Spider, Huge":       { level: 12, hits: 180, armor: "Rigid Leather", db: 35, ob: 150, attackType: "Sting", critType: "Large", size: "Large", attackDesc: "150Bi*" },
-    "Vampire":            { level: 15, hits: 150, armor: "No Armor", db: 65, ob: 100, attackType: "Bite/Claw", critType: "Huge", size: "Medium", attackDesc: "100Cl*" },
-    "Werewolf":           { level: 10, hits: 250, armor: "Rigid Leather", db: 65, ob: 120, attackType: "Bite", critType: "Huge", size: "Large", attackDesc: "120Bi*" },
-    "Wight, Minor":       { level: 10, hits: 100, armor: "No Armor", db: 40, ob: 95, attackType: "Weapon/Spell", critType: "Large", size: "Medium", attackDesc: "95We*" },
-    "Wight, Lesser":      { level: 15, hits: 125, armor: "No Armor", db: 50, ob: 115, attackType: "Weapon/Spell", critType: "Large", size: "Medium", attackDesc: "115We*" },
-    "Wight, Major":       { level: 25, hits: 175, armor: "No Armor", db: 60, ob: 170, attackType: "Weapon/Spell", critType: "Huge", size: "Medium", attackDesc: "170We*" },
-    "Crebain":            { level: 2, hits: 10, armor: "No Armor", db: 50, ob: 25, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "25Bi" },
-    "Eagles, Great":      { level: 30, hits: 250, armor: "Rigid Leather", db: 60, ob: 110, attackType: "Claw", critType: "Huge", size: "Huge", attackDesc: "110Pi*" },
-    "Hummerthorn":        { level: 3, hits: 35, armor: "No Armor", db: 50, ob: 50, attackType: "Sting", critType: "Regular", size: "Medium", attackDesc: "50Ho" },
-    "Festitycellyn":      { level: 15, hits: 250, armor: "Plate", db: 35, ob: 120, attackType: "Crush", critType: "Huge", size: "Huge", attackDesc: "120Pi" },
-
-    // ============================================================
-    // NORMAL ANIMALS
-    // ============================================================
-    "Wolf":               { level: 3, hits: 110, armor: "Soft Leather", db: 30, ob: 70, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "70Bi" },
-    "Bear, Large":        { level: 3, hits: 150, armor: "Soft Leather", db: 30, ob: 70, attackType: "Claw/Bite", critType: "Regular", size: "Large", attackDesc: "70Ra" },
-    "Bear, Giant":        { level: 7, hits: 250, armor: "Soft Leather", db: 40, ob: 95, attackType: "Claw/Bite", critType: "Regular", size: "Huge", attackDesc: "95Ra" },
-    "Dog, Large":         { level: 3, hits: 110, armor: "Soft Leather", db: 25, ob: 70, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "70Bi" },
-    "Horse, Large":       { level: 3, hits: 140, armor: "No Armor", db: 30, ob: 45, attackType: "Hoof", critType: "Regular", size: "Large", attackDesc: "45Ra" },
-    "Shark, Large":       { level: 3, hits: 120, armor: "Soft Leather", db: 30, ob: 75, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "75Bi" },
-    "Snake, Large":       { level: 2, hits: 20, armor: "No Armor", db: 30, ob: 35, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "35Ho" },
-    "Boar":               { level: 3, hits: 110, armor: "Soft Leather", db: 40, ob: 55, attackType: "Tusk", critType: "Regular", size: "Large", attackDesc: "55Ho" },
-    "Elk":                { level: 4, hits: 230, armor: "Soft Leather", db: 35, ob: 75, attackType: "Antler/Hoof", critType: "Regular", size: "Huge", attackDesc: "75Ra" },
-    "Bull":               { level: 3, hits: 190, armor: "No Armor", db: 25, ob: 50, attackType: "Horn", critType: "Regular", size: "Large", attackDesc: "50Ra" },
-    "Cat, Large":         { level: 3, hits: 100, armor: "Soft Leather", db: 35, ob: 80, attackType: "Claw", critType: "Regular", size: "Medium", attackDesc: "80Cl" },
 
     // ============================================================
     // GENERIC NPC ARCHETYPES
@@ -694,18 +650,412 @@ MERP.npcTemplates = {
     "Easterling Warrior":  { level: 4, hits: 65, armor: "Rigid Leather", db: 20, ob: 55, attackType: "Weapon", critType: "Regular", size: "Medium", attackDesc: "55 Scimitar" },
     "Haradrim Archer":    { level: 3, hits: 50, armor: "Soft Leather", db: 20, ob: 50, attackType: "Missile", critType: "Regular", size: "Medium", attackDesc: "50 Composite Bow" },
     "Dunlending Raider":  { level: 3, hits: 55, armor: "Soft Leather", db: 15, ob: 45, attackType: "Weapon", critType: "Regular", size: "Medium", attackDesc: "45 Handaxe" },
-    "Corsair Sailor":     { level: 3, hits: 50, armor: "Soft Leather", db: 20, ob: 50, attackType: "Weapon", critType: "Regular", size: "Medium", attackDesc: "50 Scimitar" }
+    "Corsair Sailor":     { level: 3, hits: 50, armor: "Soft Leather", db: 20, ob: 50, attackType: "Weapon", critType: "Regular", size: "Medium", attackDesc: "50 Scimitar" },
+    "Nazgul":             { level: 20, hits: 200, armor: "Chain", db: 75, ob: 175, attackType: "Weapon/Spell", critType: "Huge", size: "Medium", attackDesc: "175We*" },
+
+    // ============================================================
+    // 8.1 MASTER ANIMAL TABLE - BATS AND BIRDS
+    // ============================================================
+    "Barrow Owl": { level: 1, hits: 20, armor: "No Armor", db: 30, ob: 35, attackType: "Claw", critType: "Regular", size: "Small", attackDesc: "35SCl" },
+    "Bitterns": { level: 1, hits: 15, armor: "No Armor", db: 20, ob: 20, attackType: "Bash", critType: "Regular", size: "Medium", attackDesc: "20MBa" },
+    "Black Swans": { level: 3, hits: 35, armor: "No Armor", db: 50, ob: 25, attackType: "Bash", critType: "Regular", size: "Medium", attackDesc: "25SSPi" },
+    "Black Wings": { level: 1, hits: 8, armor: "No Armor", db: 50, ob: 30, attackType: "Claw", critType: "Regular", size: "Small", attackDesc: "30SCl" },
+    "Cavern Birds": { level: 2, hits: 11, armor: "No Armor", db: 60, ob: 40, attackType: "Claw", critType: "Regular", size: "Small", attackDesc: "40MCl" },
+    "Cliff Buzzards": { level: 1, hits: 30, armor: "No Armor", db: 50, ob: 30, attackType: "Claw", critType: "Regular", size: "Small", attackDesc: "30SPi" },
+    "Crebain": { level: 2, hits: 15, armor: "No Armor", db: 65, ob: 25, attackType: "Claw", critType: "Regular", size: "Small", attackDesc: "25SSPi" },
+    "Echo Hawks": { level: 1, hits: 27, armor: "No Armor", db: 50, ob: 50, attackType: "Claw", critType: "Regular", size: "Small", attackDesc: "50MCl" },
+    "Great Eagles": { level: 15, hits: 300, armor: "No Armor", db: 60, ob: 95, attackType: "Claw", critType: "Huge", size: "Huge", attackDesc: "95HCl" },
+    "Great Falcons (of Ardor)": { level: 10, hits: 150, armor: "Rigid Leather", db: 50, ob: 90, attackType: "Bite", critType: "Large", size: "Large", attackDesc: "90LBi" },
+    "Great Falcons (of Mirkwood)": { level: 5, hits: 100, armor: "Soft Leather", db: 60, ob: 75, attackType: "Claw", critType: "Large", size: "Large", attackDesc: "75LCl" },
+    "Gokotós": { level: 1, hits: 40, armor: "No Armor", db: 20, ob: 35, attackType: "Bash", critType: "Regular", size: "Medium", attackDesc: "35SPi" },
+    "Courcrows": { level: 1, hits: 20, armor: "No Armor", db: 55, ob: 10, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "10SPi" },
+    "Grass Greases": { level: 0, hits: 8, armor: "No Armor", db: 70, ob: 10, attackType: "Bash", critType: "Regular", size: "Small", attackDesc: "10TMBi" },
+    "Great Bats": { level: 5, hits: 60, armor: "No Armor", db: 60, ob: 75, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "75MBi" },
+    "Green-winged Bats": { level: 2, hits: 15, armor: "No Armor", db: 40, ob: 30, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "30SBi" },
+    "Humming Bats": { level: 9, hits: 15, armor: "No Armor", db: 55, ob: 50, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "50SSBi" },
+    "Hunting Bats": { level: 2, hits: 120, armor: "No Armor", db: 30, ob: 80, attackType: "Bash", critType: "Regular", size: "Large", attackDesc: "80LPi" },
+    "Jackdaws": { level: 1, hits: 120, armor: "No Armor", db: 30, ob: 20, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "20TPi" },
+    "Kingfishers": { level: 1, hits: 8, armor: "No Armor", db: 60, ob: 20, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "20TPi" },
+    "Kiriniki": { level: 0, hits: 5, armor: "No Armor", db: 55, ob: 5, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "5TPi" },
+    "Orao": { level: 6, hits: 120, armor: "No Armor", db: 30, ob: 81, attackType: "Claw", critType: "Regular", size: "Large", attackDesc: "81MCl" },
+    "Red Swans": { level: 1, hits: 35, armor: "No Armor", db: 20, ob: 40, attackType: "Bash", critType: "Regular", size: "Medium", attackDesc: "40MBa" },
+    "Pond Bats": { level: 0, hits: 5, armor: "No Armor", db: 60, ob: 25, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "25TBi" },
+    "Ravens": { level: 0, hits: 20, armor: "No Armor", db: 50, ob: 50, attackType: "Claw", critType: "Regular", size: "Medium", attackDesc: "50SCl" },
+    "Red Eagles": { level: 4, hits: 75, armor: "No Armor", db: 40, ob: 70, attackType: "Claw", critType: "Regular", size: "Large", attackDesc: "70LCl" },
+    "Sea Eagles": { level: 6, hits: 65, armor: "No Armor", db: 45, ob: 65, attackType: "Claw", critType: "Regular", size: "Large", attackDesc: "65MCl" },
+    "Short-eared Owls": { level: 4, hits: 20, armor: "No Armor", db: 50, ob: 50, attackType: "Claw", critType: "Regular", size: "Small", attackDesc: "50SCl" },
+    "Thrushes": { level: 0, hits: 6, armor: "No Armor", db: 60, ob: 15, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "15TPi" },
+    "Vault Shrike": { level: 1, hits: 5, armor: "No Armor", db: 50, ob: 30, attackType: "Bash", critType: "Regular", size: "Small", attackDesc: "30TBi" },
+    "Vereut Eagles": { level: 1, hits: 30, armor: "No Armor", db: 35, ob: 45, attackType: "Claw", critType: "Regular", size: "Small", attackDesc: "45MCl" },
+
+    // ============================================================
+    // 8.1 - WATER BEASTS
+    // ============================================================
+    "Carnantor": { level: 10, hits: 275, armor: "Rigid Leather", db: 40, ob: 95, attackType: "Bite", critType: "Large", size: "Huge", attackDesc: "95LBi" },
+    "Cherethrýnd": { level: 12, hits: 550, armor: "Rigid Leather", db: 40, ob: 80, attackType: "Bash", critType: "Huge", size: "Huge", attackDesc: "80HBa" },
+    "Eris Squids": { level: 1, hits: 20, armor: "No Armor", db: 50, ob: 40, attackType: "Grapple", critType: "Regular", size: "Small", attackDesc: "40SGr" },
+    "Lamprey": { level: 1, hits: 15, armor: "No Armor", db: 20, ob: 30, attackType: "Grapple", critType: "Regular", size: "Small", attackDesc: "30TGr" },
+    "Leeches": { level: 0, hits: 4, armor: "No Armor", db: 5, ob: 0, attackType: "Special", critType: "Regular", size: "Small", attackDesc: "special" },
+    "Merchanthrais": { level: 1, hits: 65, armor: "No Armor", db: 35, ob: 60, attackType: "Crush", critType: "Regular", size: "Large", attackDesc: "60HCr" },
+    "Mulkánar": { level: 6, hits: 225, armor: "Soft Leather", db: 20, ob: 30, attackType: "Hoof", critType: "Regular", size: "Large", attackDesc: "30HLBi" },
+    "Nimacaryth": { level: 5, hits: 180, armor: "Rigid Leather", db: 30, ob: 45, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "45MBi" },
+    "Pike": { level: 2, hits: 75, armor: "No Armor", db: 35, ob: 30, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "30LBi" },
+    "Suminrein": { level: 7, hits: 210, armor: "No Armor", db: 40, ob: 75, attackType: "Bite", critType: "Large", size: "Large", attackDesc: "75MBi" },
+    "Snapper": { level: 5, hits: 140, armor: "Soft Leather", db: 10, ob: 70, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "70MBa" },
+    "Ulmodil": { level: 8, hits: 110, armor: "No Armor", db: 50, ob: 70, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "70MBa" },
+    "Vacuum Clams, Small": { level: 0, hits: 5, armor: "Plate", db: 0, ob: 0, attackType: "Special", critType: "Regular", size: "Small", attackDesc: "0TCr" },
+    "Vacuum Clams, Large": { level: 3, hits: 160, armor: "Soft Leather", db: 30, ob: 60, attackType: "Crush", critType: "Regular", size: "Medium", attackDesc: "60MBa" },
+    "Webs": { level: 7, hits: 260, armor: "Soft Leather", db: 15, ob: 90, attackType: "Grapple", critType: "Regular", size: "Large", attackDesc: "90LBa" },
+
+    // ============================================================
+    // 8.1 - REPTILES AND AMPHIBIANS (RAVATSAR)
+    // ============================================================
+    "Andokulóni": { level: 3, hits: 55, armor: "Soft Leather", db: 30, ob: 30, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "30SBa" },
+    "Angusaiwéli": { level: 2, hits: 25, armor: "Soft Leather", db: 50, ob: 30, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "30SBi" },
+    "Blue Terrapins": { level: 1, hits: 15, armor: "Rigid Leather", db: 30, ob: 6, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "6SMBi" },
+    "Coireals": { level: 2, hits: 30, armor: "No Armor", db: 40, ob: 55, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "55SBi" },
+    "Egil's Vipers": { level: 8, hits: 100, armor: "No Armor", db: 60, ob: 75, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "75MBi" },
+    "Green Asps": { level: 0, hits: 5, armor: "No Armor", db: 40, ob: 0, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "0TBi" },
+    "Grey Flyers": { level: 3, hits: 20, armor: "No Armor", db: 30, ob: 35, attackType: "Claw", critType: "Regular", size: "Small", attackDesc: "35SCl" },
+    "Land Tortoises": { level: 4, hits: 75, armor: "Rigid Leather", db: 20, ob: 0, attackType: "Bash", critType: "Regular", size: "Medium", attackDesc: "0" },
+    "Marsh Adders": { level: 8, hits: 20, armor: "No Armor", db: 60, ob: 50, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "50TSt" },
+    "Marsh Crocodiles (in water)": { level: 3, hits: 120, armor: "No Armor", db: 10, ob: 80, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "80LBi" },
+    "Marsh Crocodiles (on land)": { level: 1, hits: 120, armor: "No Armor", db: 0, ob: 40, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "40MBi" },
+    "Necharim": { level: 1, hits: 30, armor: "No Armor", db: 60, ob: 40, attackType: "Sting", critType: "Regular", size: "Small", attackDesc: "40SSt" },
+    "Nethairin Erdyr": { level: 1, hits: 20, armor: "No Armor", db: 50, ob: 30, attackType: "Sting", critType: "Regular", size: "Small", attackDesc: "30SSt" },
+    "Nebraich": { level: 1, hits: 75, armor: "No Armor", db: 40, ob: 35, attackType: "Sting", critType: "Regular", size: "Small", attackDesc: "35SSt" },
+    "Amabúch": { level: 4, hits: 25, armor: "No Armor", db: 45, ob: 65, attackType: "Claw", critType: "Regular", size: "Medium", attackDesc: "65MCl" },
+    "Otrovastin": { level: 1, hits: 30, armor: "No Armor", db: 50, ob: 35, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "35SCl" },
+    "Pedalvi": { level: 4, hits: 120, armor: "Rigid Leather", db: 25, ob: 80, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "80MCr" },
+    "Rock Vipers": { level: 1, hits: 15, armor: "No Armor", db: 20, ob: 20, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "20SSt" },
+    "Sea Crocodiles": { level: 6, hits: 245, armor: "Rigid Leather", db: 50, ob: 100, attackType: "Bite", critType: "Large", size: "Large", attackDesc: "100LBi" },
+    "Shaking Asps": { level: 2, hits: 15, armor: "No Armor", db: 30, ob: 25, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "25SSt" },
+    "Slow-fangs": { level: 10, hits: 120, armor: "No Armor", db: 30, ob: 0, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "0TBi" },
+    "Truusv": { level: 1, hits: 10, armor: "No Armor", db: 30, ob: 0, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "0TBi" },
+    "Umskinvi": { level: 1, hits: 8, armor: "No Armor", db: 30, ob: 30, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "30SCl" },
+    "Zamakaivi": { level: 1, hits: 30, armor: "No Armor", db: 30, ob: 40, attackType: "Claw", critType: "Regular", size: "Medium", attackDesc: "40MCr" },
+    "Zurkuvi": { level: 1, hits: 25, armor: "No Armor", db: 40, ob: 30, attackType: "Claw", critType: "Regular", size: "Small", attackDesc: "30SCl" },
+
+    // ============================================================
+    // 8.1 - INSECTS (POTILI)
+    // ============================================================
+    "Cliff Hornets": { level: 1, hits: 1, armor: "No Armor", db: 40, ob: 5, attackType: "Sting", critType: "Regular", size: "Small", attackDesc: "5SSt" },
+    "Gélyngyl": { level: 5, hits: 45, armor: "Soft Leather", db: 30, ob: 45, attackType: "Sting", critType: "Regular", size: "Small", attackDesc: "45SPi" },
+    "Ground Bees": { level: 0, hits: 1, armor: "No Armor", db: 40, ob: 0, attackType: "Sting", critType: "Regular", size: "Small", attackDesc: "0TSt" },
+    "Mabelmaikli": { level: 4, hits: 155, armor: "Rigid Leather", db: 25, ob: 80, attackType: "Crush", critType: "Regular", size: "Large", attackDesc: "80MPi" },
+    "Neckerbrekers": { level: 0, hits: 1, armor: "No Armor", db: 45, ob: 10, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "10TBi" },
+    "Morgur Flies": { level: 0, hits: 2, armor: "No Armor", db: 35, ob: 15, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "15TBi" },
+    "Ulcercain": { level: 0, hits: 3, armor: "No Armor", db: 45, ob: 25, attackType: "Sting", critType: "Regular", size: "Small", attackDesc: "25TPi" },
+
+    // ============================================================
+    // 8.1 - LEAF-EATERS (LASSAMADIN)
+    // ============================================================
+    "Aurych": { level: 2, hits: 95, armor: "No Armor", db: 30, ob: 35, attackType: "Bash", critType: "Regular", size: "Medium", attackDesc: "35MHo" },
+    "Caru": { level: 2, hits: 140, armor: "No Armor", db: 20, ob: 50, attackType: "Hoof", critType: "Regular", size: "Medium", attackDesc: "50MHo" },
+    "Colramix": { level: 1, hits: 70, armor: "No Armor", db: 40, ob: 20, attackType: "Bash", critType: "Regular", size: "Medium", attackDesc: "20MHo" },
+    "Gasrad": { level: 0, hits: 10, armor: "No Armor", db: 10, ob: 5, attackType: "Bash", critType: "Regular", size: "Small", attackDesc: "5SBi" },
+    "Burael Deer": { level: 1, hits: 50, armor: "No Armor", db: 45, ob: 20, attackType: "Hoof", critType: "Regular", size: "Small", attackDesc: "20SHo" },
+    "Fimirnorë": { level: 2, hits: 70, armor: "No Armor", db: 35, ob: 15, attackType: "Bash", critType: "Regular", size: "Small", attackDesc: "15SSCl" },
+    "Goral": { level: 1, hits: 55, armor: "No Armor", db: 40, ob: 50, attackType: "Bash", critType: "Regular", size: "Medium", attackDesc: "50MBa" },
+    "Kine of Araw": { level: 5, hits: 135, armor: "No Armor", db: 30, ob: 100, attackType: "Hoof", critType: "Regular", size: "Large", attackDesc: "100LHo" },
+    "Losrandir": { level: 2, hits: 90, armor: "No Armor", db: 20, ob: 40, attackType: "Hoof", critType: "Regular", size: "Large", attackDesc: "40MHo" },
+    "Nimfiara": { level: 4, hits: 110, armor: "No Armor", db: 25, ob: 55, attackType: "Hoof", critType: "Regular", size: "Large", attackDesc: "55MHo" },
+    "Ruinossi": { level: 3, hits: 65, armor: "No Armor", db: 30, ob: 60, attackType: "Bash", critType: "Regular", size: "Medium", attackDesc: "60MBa" },
+    "Szetanyi": { level: 2, hits: 50, armor: "No Armor", db: 40, ob: 40, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "40SBa" },
+    "Wild Goats": { level: 3, hits: 60, armor: "No Armor", db: 25, ob: 40, attackType: "Bash", critType: "Regular", size: "Medium", attackDesc: "40MBa" },
+
+    // ============================================================
+    // 8.1 - RIDING AND DRAFT ANIMALS
+    // ============================================================
+    "Andamundar": { level: 7, hits: 210, armor: "Soft Leather", db: 30, ob: 110, attackType: "Crush", critType: "Large", size: "Huge", attackDesc: "110LCr" },
+    "Devevi, runners": { level: 4, hits: 350, armor: "Rigid Leather", db: 30, ob: 85, attackType: "Hoof", critType: "Large", size: "Huge", attackDesc: "85HBa" },
+    "Devevi, workers": { level: 3, hits: 130, armor: "No Armor", db: 10, ob: 30, attackType: "Bash", critType: "Regular", size: "Large", attackDesc: "30MBa" },
+    "Elven Horses": { level: 10, hits: 100, armor: "No Armor", db: 60, ob: 40, attackType: "Hoof", critType: "Regular", size: "Large", attackDesc: "40MCr" },
+    "Horses of Mordor": { level: 9, hits: 100, armor: "No Armor", db: 25, ob: 85, attackType: "Hoof", critType: "Regular", size: "Large", attackDesc: "85HBa" },
+    "Losandamundar": { level: 7, hits: 170, armor: "Soft Leather", db: 25, ob: 30, attackType: "Bash", critType: "Regular", size: "Large", attackDesc: "30MBa" },
+    "Marsh Ponies": { level: 2, hits: 100, armor: "No Armor", db: 20, ob: 30, attackType: "Hoof", critType: "Regular", size: "Medium", attackDesc: "30MLTs" },
+    "Mearas": { level: 8, hits: 170, armor: "No Armor", db: 50, ob: 100, attackType: "Hoof", critType: "Regular", size: "Large", attackDesc: "100MCr" },
+    "Mumakil": { level: 7, hits: 400, armor: "Rigid Leather", db: 25, ob: 95, attackType: "Crush", critType: "Large", size: "Huge", attackDesc: "95HBa" },
+    "Wild Horses": { level: 6, hits: 120, armor: "No Armor", db: 40, ob: 40, attackType: "Hoof", critType: "Regular", size: "Large", attackDesc: "40MCr" },
+    "Zurukuvi": { level: 3, hits: 135, armor: "No Armor", db: 45, ob: 75, attackType: "Crush", critType: "Regular", size: "Large", attackDesc: "75MCr" },
+
+    // ============================================================
+    // 8.1 - PREDATORS (MEAT-EATERS / APSANNAKIN)
+    // ============================================================
+    "Black Bears": { level: 5, hits: 150, armor: "Soft Leather", db: 20, ob: 65, attackType: "Claw", critType: "Large", size: "Large", attackDesc: "65LGr" },
+    "Black Minks": { level: 1, hits: 50, armor: "Soft Leather", db: 30, ob: 50, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "50MBi" },
+    "Blue Bears": { level: 10, hits: 200, armor: "Soft Leather", db: 40, ob: 80, attackType: "Claw", critType: "Large", size: "Large", attackDesc: "80LCl" },
+    "Blue Otters": { level: 1, hits: 80, armor: "No Armor", db: 25, ob: 40, attackType: "Claw", critType: "Regular", size: "Medium", attackDesc: "40SGr" },
+    "Cave Bears": { level: 12, hits: 300, armor: "Soft Leather", db: 40, ob: 95, attackType: "Claw", critType: "Large", size: "Huge", attackDesc: "95HCl" },
+    "Chetmig": { level: 5, hits: 150, armor: "Soft Leather", db: 20, ob: 75, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "75LCl" },
+    "Cliff Lions": { level: 5, hits: 140, armor: "Soft Leather", db: 20, ob: 85, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "85LBi" },
+    "Death Shrews": { level: 4, hits: 2, armor: "Rigid Leather", db: 70, ob: 85, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "85TBi" },
+    "Dire Wolves, Adult": { level: 4, hits: 80, armor: "Soft Leather", db: 45, ob: 75, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "75LBa" },
+    "Dire Wolves, Young": { level: 2, hits: 40, armor: "No Armor", db: 35, ob: 60, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "60LBi" },
+    "Dunmen's Dogs": { level: 1, hits: 30, armor: "No Armor", db: 40, ob: 45, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "45SBi" },
+    "Fishing Cats": { level: 1, hits: 50, armor: "No Armor", db: 50, ob: 30, attackType: "Claw", critType: "Regular", size: "Small", attackDesc: "30MCl" },
+    "Gich": { level: 2, hits: 45, armor: "No Armor", db: 50, ob: 40, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "40MBi" },
+    "Giant Martens": { level: 4, hits: 75, armor: "No Armor", db: 50, ob: 60, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "60MBi" },
+    "Glutani": { level: 2, hits: 50, armor: "No Armor", db: 50, ob: 40, attackType: "Claw", critType: "Regular", size: "Medium", attackDesc: "40MCl" },
+    "Grass Cats": { level: 1, hits: 100, armor: "No Armor", db: 50, ob: 40, attackType: "Claw", critType: "Regular", size: "Small", attackDesc: "40MCl" },
+    "Grey Wolves": { level: 4, hits: 110, armor: "No Armor", db: 30, ob: 35, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "35LBi" },
+    "Highland Lynxes": { level: 2, hits: 70, armor: "No Armor", db: 35, ob: 45, attackType: "Claw", critType: "Regular", size: "Small", attackDesc: "45MCl" },
+    "Hounds": { level: 3, hits: 45, armor: "No Armor", db: 55, ob: 45, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "45MBi" },
+    "Madratines": { level: 2, hits: 70, armor: "No Armor", db: 65, ob: 63, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "63SBi" },
+    "Marsh Mastiffs": { level: 2, hits: 45, armor: "No Armor", db: 60, ob: 30, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "30SCl" },
+    "Merise Tyka": { level: 3, hits: 60, armor: "Soft Leather", db: 40, ob: 50, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "50MBi" },
+    "North Bears": { level: 7, hits: 240, armor: "Soft Leather", db: 45, ob: 45, attackType: "Bash", critType: "Regular", size: "Large", attackDesc: "45MBa" },
+    "Red Foxes": { level: 1, hits: 45, armor: "No Armor", db: 50, ob: 45, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "45SBa" },
+    "Red Wolves": { level: 2, hits: 130, armor: "Soft Leather", db: 45, ob: 70, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "70LBi" },
+    "Sheep-Hounds": { level: 1, hits: 140, armor: "Soft Leather", db: 55, ob: 80, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "80MBi" },
+    "Sloth Bears": { level: 5, hits: 325, armor: "Soft Leather", db: 10, ob: 100, attackType: "Bite", critType: "Large", size: "Large", attackDesc: "100HBi" },
+    "Spotted Lions": { level: 7, hits: 140, armor: "Soft Leather", db: 35, ob: 85, attackType: "Claw", critType: "Regular", size: "Large", attackDesc: "85LCl" },
+    "Unceavi": { level: 3, hits: 90, armor: "No Armor", db: 35, ob: 80, attackType: "Claw", critType: "Regular", size: "Medium", attackDesc: "80LCl" },
+    "Vuk": { level: 3, hits: 110, armor: "No Armor", db: 40, ob: 70, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "70MBi" },
+    "Yukarlak": { level: 1, hits: 170, armor: "Soft Leather", db: 50, ob: 85, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "85LBi" },
+    "War-wolves": { level: 7, hits: 170, armor: "Soft Leather", db: 50, ob: 83, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "83LBi" },
+    "White Foxes": { level: 1, hits: 40, armor: "No Armor", db: 70, ob: 35, attackType: "Bite", critType: "Regular", size: "Small", attackDesc: "35SBi" },
+    "White Wolves": { level: 8, hits: 140, armor: "No Armor", db: 70, ob: 50, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "50MBi" },
+
+    // ============================================================
+    // 8.1 - OTHER DANGEROUS ANIMALS
+    // ============================================================
+    "Boars": { level: 1, hits: 120, armor: "No Armor", db: 40, ob: 30, attackType: "Bash", critType: "Regular", size: "Medium", attackDesc: "30SBi" },
+    "Fen Boars": { level: 1, hits: 100, armor: "No Armor", db: 30, ob: 40, attackType: "Bash", critType: "Regular", size: "Medium", attackDesc: "40MHo" },
+    "Grey Apes": { level: 1, hits: 100, armor: "No Armor", db: 30, ob: 30, attackType: "Bash", critType: "Regular", size: "Medium", attackDesc: "30SBi" },
+    "Majmun": { level: 1, hits: 25, armor: "No Armor", db: 40, ob: 95, attackType: "Crush", critType: "Huge", size: "Huge", attackDesc: "95HCr" },
+    "Slirdu": { level: 7, hits: 240, armor: "No Armor", db: 30, ob: 90, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "90MBa" },
+    "Uvag-Aak": { level: 6, hits: 140, armor: "No Armor", db: 20, ob: 50, attackType: "Crush", critType: "Regular", size: "Large", attackDesc: "50MBa" },
+
+    // ============================================================
+    // 8.2 MASTER MONSTER TABLE - DEMONIC WATER MONSTERS
+    // ============================================================
+    "Demon-whales": { level: 25, hits: 500, armor: "Soft Leather", db: 25, ob: 120, attackType: "Bash", critType: "Huge", size: "Huge", attackDesc: "120HBa" },
+    "Fell Turtles": { level: 15, hits: 250, armor: "Plate", db: 35, ob: 120, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "120HBi" },
+    "Ninivet": { level: 9, hits: 130, armor: "Soft Leather", db: 10, ob: 70, attackType: "Bite", critType: "Large", size: "Large", attackDesc: "70LBa" },
+    "Red Jaws": { level: 4, hits: 90, armor: "Soft Leather", db: 35, ob: 90, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "90Bi" },
+    "Vodyanoi": { level: 1, hits: 55, armor: "Soft Leather", db: 40, ob: 60, attackType: "Crush", critType: "Regular", size: "Large", attackDesc: "60HBa" },
+    "Watcher in the Water": { level: 35, hits: 400, armor: "Rigid Leather", db: 40, ob: 150, attackType: "Grapple", critType: "Huge", size: "Huge", attackDesc: "150HGr" },
+
+    // ============================================================
+    // 8.2 - EVIL HUORNS AND TREES
+    // ============================================================
+    "Evil Huorns": { level: 30, hits: 400, armor: "Plate", db: 0, ob: 80, attackType: "Crush", critType: "Huge", size: "Huge", attackDesc: "80HBa" },
+    "Evil Trees": { level: 3, hits: 50, armor: "Rigid Leather", db: 10, ob: 20, attackType: "Crush", critType: "Regular", size: "Large", attackDesc: "20SGr" },
+
+    // ============================================================
+    // 8.2 - DEMONS
+    // ============================================================
+    "Balrogs": { level: 50, hits: 400, armor: "Plate", db: 90, ob: 275, attackType: "Weapon", critType: "Huge", size: "Huge", attackDesc: "275Wkstl" },
+    "Black Demons": { level: 30, hits: 175, armor: "Rigid Leather", db: 50, ob: 120, attackType: "Claw", critType: "Huge", size: "Large", attackDesc: "120HCl" },
+    "Lassaraukar, Lesser": { level: 15, hits: 225, armor: "Rigid Leather", db: 50, ob: 150, attackType: "Crush", critType: "Large", size: "Large", attackDesc: "150dkr" },
+    "Lassaraukar, Greater": { level: 25, hits: 210, armor: "No Armor", db: 80, ob: 100, attackType: "Crush", critType: "Large", size: "Large", attackDesc: "100LCr" },
+    "Vampires of Morgoth": { level: 25, hits: 400, armor: "Soft Leather", db: 50, ob: 27, attackType: "Special", critType: "Huge", size: "Huge", attackDesc: "special" },
+
+    // ============================================================
+    // 8.2 - DRAGONS
+    // ============================================================
+    "Cave Drakes": { level: 13, hits: 250, armor: "Plate", db: 40, ob: 90, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "90HBi" },
+    "Cave Worms": { level: 10, hits: 160, armor: "Rigid Leather", db: 20, ob: 90, attackType: "Bite", critType: "Large", size: "Large", attackDesc: "90LBi" },
+    "Cold-drakes": { level: 30, hits: 500, armor: "Plate", db: 50, ob: 120, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "120HBi" },
+    "Ice-drakes": { level: 30, hits: 450, armor: "Plate", db: 50, ob: 110, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "110HBi" },
+    "Land Drakes": { level: 18, hits: 350, armor: "Plate", db: 40, ob: 100, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "100HBi" },
+    "Winged Cold-drakes": { level: 30, hits: 450, armor: "Chain", db: 60, ob: 100, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "100HBi" },
+    "Fire-drakes": { level: 35, hits: 200, armor: "Plate", db: 50, ob: 60, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "60HBi" },
+    "Marsh-drakes": { level: 15, hits: 240, armor: "Rigid Leather", db: 40, ob: 150, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "150HBa" },
+    "Rain-drakes": { level: 12, hits: 200, armor: "Rigid Leather", db: 40, ob: 100, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "100HBi" },
+    "Water-drakes": { level: 18, hits: 150, armor: "Plate", db: 25, ob: 100, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "100HBi" },
+    "Sand Drakes": { level: 8, hits: 350, armor: "No Armor", db: 50, ob: 110, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "110HBi" },
+    "Were-worms": { level: 8, hits: 350, armor: "Rigid Leather", db: 55, ob: 120, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "120LBi" },
+
+    // ============================================================
+    // 8.2 - FLYING MONSTERS
+    // ============================================================
+    "Flying Crebain": { level: 3, hits: 25, armor: "No Armor", db: 50, ob: 20, attackType: "Claw", critType: "Regular", size: "Small", attackDesc: "20SPi" },
+    "Fell Beasts": { level: 20, hits: 240, armor: "Rigid Leather", db: 50, ob: 90, attackType: "Claw", critType: "Large", size: "Huge", attackDesc: "90LCr" },
+
+    // ============================================================
+    // 8.2 - GIANT RACES
+    // ============================================================
+    "Giants": { level: 25, hits: 250, armor: "Rigid Leather", db: 30, ob: 95, attackType: "Weapon", critType: "Large", size: "Large", attackDesc: "95We" },
+    "Trolls, Cave": { level: 12, hits: 250, armor: "Rigid Leather", db: 25, ob: 110, attackType: "Weapon", critType: "Large", size: "Large", attackDesc: "110We" },
+    "Trolls, Forest": { level: 6, hits: 150, armor: "Rigid Leather", db: 15, ob: 95, attackType: "Crush", critType: "Large", size: "Large", attackDesc: "95LCl" },
+    "Trolls, Hill": { level: 10, hits: 175, armor: "Rigid Leather", db: 20, ob: 70, attackType: "Crush", critType: "Large", size: "Large", attackDesc: "70LCl" },
+    "Trolls, Mountain": { level: 11, hits: 240, armor: "Rigid Leather", db: 40, ob: 120, attackType: "Bash", critType: "Large", size: "Large", attackDesc: "120We" },
+    "Trolls, Snow": { level: 13, hits: 180, armor: "Rigid Leather", db: 30, ob: 105, attackType: "Crush", critType: "Large", size: "Large", attackDesc: "105HCl" },
+    "Trolls, Stone": { level: 7, hits: 230, armor: "Rigid Leather", db: 15, ob: 80, attackType: "Bash", critType: "Large", size: "Large", attackDesc: "80LBa" },
+    "Trolls, Black (Olog)": { level: 9, hits: 250, armor: "Rigid Leather", db: 50, ob: 120, attackType: "Weapon", critType: "Large", size: "Large", attackDesc: "120We" },
+
+    // ============================================================
+    // 8.2 - PUKEL-CREATURES
+    // ============================================================
+    "Colbran": { level: 18, hits: 200, armor: "Chain", db: 70, ob: 150, attackType: "Bash", critType: "Large", size: "Large", attackDesc: "150LBa" },
+    "Hurndaen": { level: 15, hits: 200, armor: "Plate", db: 30, ob: 100, attackType: "Crush", critType: "Large", size: "Large", attackDesc: "100LGr" },
+    "Hurnkennec": { level: 10, hits: 130, armor: "Plate", db: 40, ob: 80, attackType: "Crush", critType: "Large", size: "Large", attackDesc: "80MPr" },
+    "Mendaen": { level: 8, hits: 150, armor: "Chain", db: 20, ob: 60, attackType: "Crush", critType: "Large", size: "Large", attackDesc: "60LCr" },
+    "Mensharag": { level: 5, hits: 80, armor: "Plate", db: 25, ob: 90, attackType: "Bash", critType: "Regular", size: "Medium", attackDesc: "90We" },
+    "Púkel-men": { level: 1, hits: 150, armor: "Chain", db: 40, ob: 60, attackType: "Bash", critType: "Regular", size: "Large", attackDesc: "60MBa" },
+    "Silent Watchers": { level: 15, hits: 150, armor: "Plate", db: 25, ob: 0, attackType: "Special", critType: "Large", size: "Large", attackDesc: "special" },
+
+    // ============================================================
+    // 8.2 - GIANT SPIDERS AND INSECTS
+    // ============================================================
+    "Giant Spiders, Lesser": { level: 8, hits: 160, armor: "Soft Leather", db: 40, ob: 70, attackType: "Sting", critType: "Regular", size: "Large", attackDesc: "70LPi" },
+    "Giant Spiders, Greater": { level: 3, hits: 35, armor: "Rigid Leather", db: 50, ob: 120, attackType: "Sting", critType: "Large", size: "Large", attackDesc: "120MPr" },
+    "Hummerhorns": { level: 1, hits: 55, armor: "No Armor", db: 50, ob: 40, attackType: "Bash", critType: "Regular", size: "Medium", attackDesc: "40MBr" },
+    "King Spiders": { level: 12, hits: 165, armor: "Chain", db: 75, ob: 30, attackType: "Bite", critType: "Large", size: "Large", attackDesc: "30We" },
+
+    // ============================================================
+    // 8.2 - UNDEAD BEINGS
+    // ============================================================
+    "Barrow Wights": { level: 15, hits: 165, armor: "No Armor", db: 75, ob: 90, attackType: "Weapon", critType: "Regular", size: "Medium", attackDesc: "90We" },
+    "Corpse Candles": { level: 7, hits: 100, armor: "No Armor", db: 30, ob: 60, attackType: "Special", critType: "Regular", size: "Medium", attackDesc: "60MBa" },
+    "Corpse Lanterns": { level: 1, hits: 135, armor: "No Armor", db: 40, ob: 110, attackType: "Special", critType: "Regular", size: "Medium", attackDesc: "110We" },
+    "Ghosts, Lesser": { level: 1, hits: 100, armor: "No Armor", db: 30, ob: 25, attackType: "Special", critType: "Regular", size: "Medium", attackDesc: "25SBa" },
+    "Ghosts, Greater": { level: 10, hits: 165, armor: "Soft Leather", db: 10, ob: 60, attackType: "Special", critType: "Regular", size: "Medium", attackDesc: "special" },
+    "Ghouls, Lesser": { level: 1, hits: 75, armor: "No Armor", db: 10, ob: 40, attackType: "Bite", critType: "Regular", size: "Medium", attackDesc: "40SBa" },
+    "Ghouls, Greater": { level: 2, hits: 55, armor: "No Armor", db: 0, ob: 45, attackType: "Claw", critType: "Regular", size: "Medium", attackDesc: "45We" },
+    "Lesinavi": { level: 4, hits: 100, armor: "No Armor", db: 10, ob: 40, attackType: "Special", critType: "Regular", size: "Medium", attackDesc: "40MBa" },
+    "Mewlips": { level: 2, hits: 135, armor: "No Armor", db: 0, ob: 50, attackType: "Weapon", critType: "Regular", size: "Medium", attackDesc: "50We" },
+    "Sand Devils": { level: 15, hits: 150, armor: "Soft Leather", db: 100, ob: 40, attackType: "Special", critType: "Regular", size: "Medium", attackDesc: "special" },
+    "Skeletons, Minor": { level: 1, hits: 75, armor: "No Armor", db: 10, ob: 80, attackType: "Weapon", critType: "Regular", size: "Medium", attackDesc: "80 Shock Bolt" },
+    "Skeletons, Lesser": { level: 3, hits: 25, armor: "No Armor", db: 0, ob: 95, attackType: "Weapon", critType: "Regular", size: "Medium", attackDesc: "95We" },
+    "Skeletons, Greater": { level: 5, hits: 50, armor: "No Armor", db: 10, ob: 70, attackType: "Weapon", critType: "Regular", size: "Medium", attackDesc: "70LBa" },
+    "Skeletons, Lord": { level: 8, hits: 30, armor: "No Armor", db: 70, ob: 75, attackType: "Weapon", critType: "Regular", size: "Medium", attackDesc: "75LBi" },
+    "Specters, Lesser": { level: 5, hits: 150, armor: "No Armor", db: 100, ob: 70, attackType: "Special", critType: "Regular", size: "Medium", attackDesc: "70Spcl" },
+    "Specters, Greater": { level: 10, hits: 200, armor: "No Armor", db: 75, ob: 80, attackType: "Special", critType: "Regular", size: "Medium", attackDesc: "80 Shock Bolt" },
+    "Swamp Stars": { level: 9, hits: 30, armor: "No Armor", db: 45, ob: 75, attackType: "Special", critType: "Regular", size: "Medium", attackDesc: "75MCl" },
+    "Ta-Fa-Lisch": { level: 7, hits: 180, armor: "Soft Leather", db: 60, ob: 120, attackType: "Bite", critType: "Large", size: "Large", attackDesc: "120LBi" },
+    "Wargs": { level: 8, hits: 250, armor: "No Armor", db: 55, ob: 130, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "130LBi" },
+    "Werewolves": { level: 12, hits: 350, armor: "No Armor", db: 85, ob: 95, attackType: "Claw", critType: "Regular", size: "Large", attackDesc: "95HCl" },
+
+    // ============================================================
+    // 8.3 SPECIFIC CREATURE TABLE - GREAT EAGLES & FALCONS & RAVENS
+    // ============================================================
+    "Thorondor": { level: 60, hits: 550, armor: "Rigid Leather", db: 100, ob: 300, attackType: "Claw", critType: "Huge", size: "Huge", attackDesc: "300HCl" },
+    "Gwaihir": { level: 45, hits: 350, armor: "Rigid Leather", db: 80, ob: 150, attackType: "Claw", critType: "Huge", size: "Huge", attackDesc: "150HCl" },
+    "Landroval": { level: 39, hits: 300, armor: "Rigid Leather", db: 90, ob: 150, attackType: "Claw", critType: "Huge", size: "Huge", attackDesc: "150HCl" },
+    "Sulroch": { level: 15, hits: 150, armor: "Soft Leather", db: 90, ob: 110, attackType: "Claw", critType: "Huge", size: "Large", attackDesc: "110LCl" },
+    "Elroa": { level: 20, hits: 180, armor: "Soft Leather", db: 75, ob: 130, attackType: "Claw", critType: "Huge", size: "Huge", attackDesc: "130LCl" },
+    "Gilsul": { level: 18, hits: 170, armor: "Soft Leather", db: 75, ob: 120, attackType: "Claw", critType: "Huge", size: "Large", attackDesc: "120LCl" },
+    "Roac": { level: 6, hits: 30, armor: "No Armor", db: 40, ob: 55, attackType: "Claw", critType: "Regular", size: "Small", attackDesc: "55SCl" },
+    "The Old Thrush": { level: 3, hits: 15, armor: "No Armor", db: 50, ob: 25, attackType: "Bash", critType: "Regular", size: "Small", attackDesc: "25TPi" },
+
+    // ============================================================
+    // 8.3 - HORSES
+    // ============================================================
+    "Nahar": { level: 45, hits: 400, armor: "Soft Leather", db: 120, ob: 200, attackType: "Hoof", critType: "Large", size: "Large", attackDesc: "200LCr" },
+    "Nimros": { level: 15, hits: 300, armor: "Soft Leather", db: 80, ob: 100, attackType: "Hoof", critType: "Large", size: "Large", attackDesc: "100MCr" },
+    "Rochallor": { level: 25, hits: 210, armor: "Soft Leather", db: 100, ob: 160, attackType: "Hoof", critType: "Large", size: "Large", attackDesc: "160LCr" },
+    "Mordor Horse": { level: 9, hits: 170, armor: "Soft Leather", db: 50, ob: 110, attackType: "Hoof", critType: "Large", size: "Large", attackDesc: "110LCr" },
+    "Felaróf": { level: 15, hits: 250, armor: "Soft Leather", db: 70, ob: 150, attackType: "Hoof", critType: "Large", size: "Large", attackDesc: "150LCr" },
+    "Shadowfax": { level: 12, hits: 210, armor: "Soft Leather", db: 60, ob: 120, attackType: "Hoof", critType: "Large", size: "Large", attackDesc: "120MCr" },
+    "Snowmane": { level: 10, hits: 170, armor: "Soft Leather", db: 50, ob: 110, attackType: "Hoof", critType: "Large", size: "Large", attackDesc: "110MCr" },
+
+    // ============================================================
+    // 8.3 - HOUNDS, BOARS & TREES
+    // ============================================================
+    "Huan": { level: 18, hits: 350, armor: "Soft Leather", db: 120, ob: 220, attackType: "Bite", critType: "Huge", size: "Large", attackDesc: "220LBi" },
+    "Evechar Boar": { level: 7, hits: 190, armor: "Soft Leather", db: 0, ob: 110, attackType: "Crush", critType: "Large", size: "Large", attackDesc: "110MCr" },
+    "Old Man Willow": { level: 25, hits: 450, armor: "Plate", db: 0, ob: 75, attackType: "Crush", critType: "Huge", size: "Huge", attackDesc: "75HCr" },
+    "Sleeping Klow": { level: 50, hits: 600, armor: "Plate", db: 125, ob: 60, attackType: "Crush", critType: "Huge", size: "Huge", attackDesc: "60HGr" },
+
+    // ============================================================
+    // 8.3 - DEMONS
+    // ============================================================
+    "Gothmog": { level: 100, hits: 666, armor: "Plate", db: 115, ob: 450, attackType: "Weapon", critType: "Huge", size: "Huge", attackDesc: "450We" },
+    "Durin's Bane": { level: 66, hits: 420, armor: "Plate", db: 90, ob: 275, attackType: "Weapon", critType: "Huge", size: "Huge", attackDesc: "275We" },
+    "Lungorthin": { level: 90, hits: 566, armor: "Plate", db: 100, ob: 415, attackType: "Weapon", critType: "Huge", size: "Huge", attackDesc: "415We" },
+    "Sjpardach": { level: 17, hits: 170, armor: "No Armor", db: 40, ob: 100, attackType: "Special", critType: "Huge", size: "Large", attackDesc: "100special" },
+    "Demons of Agbrand, Leahy": { level: 14, hits: 150, armor: "Rigid Leather", db: 40, ob: 150, attackType: "Crush", critType: "Large", size: "Large", attackDesc: "150LCl" },
+    "Demons of Agbrand, Mourfuin": { level: 10, hits: 300, armor: "Rigid Leather", db: 80, ob: 250, attackType: "Crush", critType: "Large", size: "Large", attackDesc: "250whl" },
+    "Demons of Agbrand, Bazard": { level: 20, hits: 250, armor: "Rigid Leather", db: 40, ob: 30, attackType: "Crush", critType: "Large", size: "Large", attackDesc: "30HCl" },
+    "Wind of Taurung, Aur": { level: 6, hits: 60, armor: "Soft Leather", db: 20, ob: 70, attackType: "Special", critType: "Regular", size: "Large", attackDesc: "70Spcl" },
+    "Wind of Taurung, Kax": { level: 12, hits: 100, armor: "Soft Leather", db: 30, ob: 100, attackType: "Special", critType: "Regular", size: "Large", attackDesc: "100Spcl" },
+    "Wind of Taurung, Eus": { level: 18, hits: 130, armor: "Soft Leather", db: 40, ob: 120, attackType: "Special", critType: "Regular", size: "Large", attackDesc: "120Spcl" },
+    "Wind of Taurung, Gan": { level: 24, hits: 160, armor: "Soft Leather", db: 50, ob: 130, attackType: "Special", critType: "Regular", size: "Large", attackDesc: "130Spcl" },
+    "Wind of Taurung, Ior": { level: 30, hits: 201, armor: "Soft Leather", db: 70, ob: 180, attackType: "Special", critType: "Regular", size: "Large", attackDesc: "180Spcl" },
+    "Wind of Taurung, Kel": { level: 36, hits: 240, armor: "Soft Leather", db: 80, ob: 200, attackType: "Special", critType: "Regular", size: "Large", attackDesc: "200Spcl" },
+
+    // ============================================================
+    // 8.3 - NAMED DRAGONS
+    // ============================================================
+    "Agburanar": { level: 31, hits: 463, armor: "Plate", db: 50, ob: 120, attackType: "Claw", critType: "Huge", size: "Huge", attackDesc: "120HCl" },
+    "Ando-anca": { level: 49, hits: 400, armor: "Plate", db: 40, ob: 150, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "150HBi" },
+    "Culgor": { level: 30, hits: 401, armor: "Chain", db: 60, ob: 120, attackType: "Claw", critType: "Huge", size: "Huge", attackDesc: "120HCl" },
+    "Emburghidspo": { level: 30, hits: 300, armor: "Rigid Leather", db: 40, ob: 110, attackType: "Claw", critType: "Huge", size: "Huge", attackDesc: "110HGr" },
+    "Goestir": { level: 40, hits: 475, armor: "Plate", db: 45, ob: 130, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "130HBi" },
+    "Huanrith": { level: 33, hits: 456, armor: "Plate", db: 55, ob: 115, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "115HBi" },
+    "Hyarlóca": { level: 28, hits: 329, armor: "Plate", db: 60, ob: 90, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "90HBi" },
+    "Kipaar": { level: 29, hits: 365, armor: "Rigid Leather", db: 65, ob: 95, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "95HBi" },
+    "Lamirtanc": { level: 43, hits: 510, armor: "Plate", db: 55, ob: 145, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "145HBi" },
+    "Lastalaika": { level: 37, hits: 487, armor: "Plate", db: 45, ob: 135, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "135HBi" },
+    "Merkampa": { level: 47, hits: 533, armor: "Plate", db: 60, ob: 135, attackType: "Claw", critType: "Huge", size: "Huge", attackDesc: "135HCl" },
+    "Niocepa": { level: 30, hits: 360, armor: "Plate", db: 70, ob: 120, attackType: "Grapple", critType: "Huge", size: "Huge", attackDesc: "120LGr" },
+    "Scatha": { level: 52, hits: 555, armor: "Plate", db: 65, ob: 150, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "150HBi" },
+    "Lomaw": { level: 35, hits: 467, armor: "Plate", db: 50, ob: 120, attackType: "Claw", critType: "Huge", size: "Huge", attackDesc: "120HCl" },
+    "Nimanaur": { level: 32, hits: 451, armor: "Plate", db: 60, ob: 120, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "120HBi" },
+    "Bairanax": { level: 34, hits: 447, armor: "Chain", db: 60, ob: 100, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "100HBi" },
+    "Daoloman": { level: 33, hits: 428, armor: "Chain", db: 70, ob: 125, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "125HBi" },
+    "Dyaca": { level: 35, hits: 422, armor: "Chain", db: 70, ob: 130, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "130HBi" },
+    "Khuzadrepa": { level: 37, hits: 460, armor: "Chain", db: 60, ob: 130, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "130HBi" },
+    "Ancalagon": { level: 100, hits: 1238, armor: "Plate", db: 275, ob: 450, attackType: "Claw", critType: "Huge", size: "Huge", attackDesc: "450HBi" },
+    "Angurth": { level: 55, hits: 590, armor: "Plate", db: 60, ob: 285, attackType: "Claw", critType: "Huge", size: "Huge", attackDesc: "285HCl" },
+    "Glaurung": { level: 85, hits: 600, armor: "Plate", db: 110, ob: 355, attackType: "Claw", critType: "Huge", size: "Huge", attackDesc: "355HBi" },
+    "Iargan": { level: 34, hits: 471, armor: "Plate", db: 60, ob: 160, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "160HBi" },
+    "Leucaruth": { level: 55, hits: 500, armor: "Plate", db: 60, ob: 100, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "100HBi" },
+    "Ruingurth": { level: 66, hits: 646, armor: "Plate", db: 30, ob: 100, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "100HBi" },
+    "Smaug": { level: 46, hits: 523, armor: "Chain", db: 75, ob: 125, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "125HBi" },
+    "Throkmaw": { level: 30, hits: 439, armor: "Plate", db: 65, ob: 105, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "105HBi" },
+    "Uthuial": { level: 75, hits: 500, armor: "Plate", db: 55, ob: 125, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "125HBi" },
+    "Itangast": { level: 36, hits: 495, armor: "Plate", db: 30, ob: 125, attackType: "Bite", critType: "Huge", size: "Huge", attackDesc: "125HBi" },
+
+    // ============================================================
+    // 8.3 - NAMED FLYING MONSTERS & GIANT SPIDERS
+    // ============================================================
+    "Ungoliant": { level: 450, hits: 275, armor: "Plate", db: 275, ob: 450, attackType: "Special", critType: "Huge", size: "Huge", attackDesc: "450HBi" },
+    "Thuringwethil": { level: 500, hits: 325, armor: "Plate", db: 90, ob: 520, attackType: "Special", critType: "Huge", size: "Huge", attackDesc: "520HBi" },
+    "Fell Beast (named)": { level: 35, hits: 200, armor: "Rigid Leather", db: 50, ob: 95, attackType: "Claw", critType: "Large", size: "Huge", attackDesc: "95HCl" },
+    "Daelosha": { level: 25, hits: 285, armor: "Rigid Leather", db: 60, ob: 80, attackType: "Sting", critType: "Large", size: "Huge", attackDesc: "80HCl" },
+    "Erna Sarah": { level: 20, hits: 375, armor: "No Armor", db: 70, ob: 80, attackType: "Sting", critType: "Large", size: "Huge", attackDesc: "80 Shock Bolt" },
+    "Shelob": { level: 50, hits: 500, armor: "No Armor", db: 80, ob: 95, attackType: "Sting", critType: "Large", size: "Huge", attackDesc: "95HCl" },
+
+    // ============================================================
+    // 8.3 - NAMED WEREWOLVES & UNDEAD BEINGS
+    // ============================================================
+    "Caran-Carach": { level: 16, hits: 200, armor: "Rigid Leather", db: 50, ob: 130, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "130LBi" },
+    "Carcharoth": { level: 18, hits: 310, armor: "Rigid Leather", db: 80, ob: 200, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "200LBi" },
+    "Drauguin": { level: 20, hits: 366, armor: "Rigid Leather", db: 90, ob: 210, attackType: "Bite", critType: "Regular", size: "Large", attackDesc: "210LBi" }
 };
 
 // ============================================================
 // NPC CATEGORIES for dropdown grouping
 // ============================================================
 MERP.npcCategories = {
+    "Bats & Birds": ["Great Eagles", "Great Falcons (of Ardor)", "Great Falcons (of Mirkwood)", "Great Bats", "Hunting Bats", "Crebain", "Red Eagles", "Sea Eagles", "Vereut Eagles", "Orao", "Barrow Owl", "Echo Hawks"],
+    "Water Beasts": ["Carnantor", "Cherethrýnd", "Eris Squids", "Merchanthrais", "Mulkánar", "Pike", "Suminrein", "Webs", "Snapper", "Lamprey"],
+    "Reptiles & Amphibians": ["Egil's Vipers", "Marsh Crocodiles (in water)", "Marsh Crocodiles (on land)", "Sea Crocodiles", "Rock Vipers", "Shaking Asps", "Slow-fangs", "Coireals", "Grey Flyers", "Angusaiwéli", "Blue Terrapins", "Marsh Adders", "Amabúch", "Pedalvi"],
+    "Insects": ["Cliff Hornets", "Gélyngyl", "Mabelmaikli", "Neckerbrekers", "Ulcercain"],
+    "Leaf-eaters": ["Kine of Araw", "Mumakil", "Nimfiara", "Caru", "Losrandir", "Wild Goats", "Aurych"],
+    "Riding & Draft Animals": ["Andamundar", "Devevi, runners", "Devevi, workers", "Elven Horses", "Horses of Mordor", "Losandamundar", "Marsh Ponies", "Mearas", "Wild Horses", "Zurukuvi"],
+    "Predators": ["Cave Bears", "Blue Bears", "Black Bears", "North Bears", "Sloth Bears", "Spotted Lions", "Cliff Lions", "Dire Wolves, Adult", "Dire Wolves, Young", "Grey Wolves", "Red Wolves", "White Wolves", "War-wolves", "Sheep-Hounds", "Hounds", "Dunmen's Dogs", "Grass Cats", "Highland Lynxes", "Giant Martens", "Merise Tyka", "Red Foxes", "White Foxes", "Vuk", "Yukarlak", "Chetmig", "Black Minks", "Blue Otters", "Death Shrews", "Marsh Mastiffs"],
+    "Other Dangerous Animals": ["Boars", "Fen Boars", "Grey Apes", "Majmun", "Slirdu", "Uvag-Aak"],
+    "Demonic Water Monsters": ["Demon-whales", "Fell Turtles", "Ninivet", "Red Jaws", "Vodyanoi", "Watcher in the Water"],
+    "Evil Huorns & Trees": ["Evil Huorns", "Evil Trees"],
+    "Demons": ["Balrogs", "Black Demons", "Lassaraukar, Lesser", "Lassaraukar, Greater", "Vampires of Morgoth"],
+    "Dragons & Drakes": ["Cave Drakes", "Cave Worms", "Cold-drakes", "Ice-drakes", "Land Drakes", "Winged Cold-drakes", "Fire-drakes", "Marsh-drakes", "Rain-drakes", "Water-drakes", "Sand Drakes", "Were-worms"],
+    "Flying Monsters": ["Flying Crebain", "Fell Beasts"],
+    "Giants & Trolls": ["Giants", "Trolls, Cave", "Trolls, Forest", "Trolls, Hill", "Trolls, Mountain", "Trolls, Snow", "Trolls, Stone", "Trolls, Black (Olog)"],
+    "Púkel-Creatures": ["Colbran", "Hurndaen", "Hurnkennec", "Mendaen", "Mensharag", "Púkel-men", "Silent Watchers"],
+    "Giant Spiders & Insects": ["Giant Spiders, Lesser", "Giant Spiders, Greater", "Hummerhorns", "King Spiders"],
+    "Undead": ["Barrow Wights", "Corpse Candles", "Corpse Lanterns", "Ghosts, Lesser", "Ghosts, Greater", "Ghouls, Lesser", "Ghouls, Greater", "Lesinavi", "Mewlips", "Sand Devils", "Skeletons, Minor", "Skeletons, Lesser", "Skeletons, Greater", "Skeletons, Lord", "Specters, Lesser", "Specters, Greater", "Swamp Stars", "Ta-Fa-Lisch", "Wargs", "Werewolves"],
+    "Named Eagles & Birds": ["Thorondor", "Gwaihir", "Landroval", "Sulroch", "Elroa", "Gilsul", "Roac", "The Old Thrush"],
+    "Named Horses": ["Nahar", "Nimros", "Rochallor", "Mordor Horse", "Felaróf", "Shadowfax", "Snowmane"],
+    "Named Hounds, Boars & Trees": ["Huan", "Evechar Boar", "Old Man Willow", "Sleeping Klow"],
+    "Named Demons": ["Gothmog", "Durin's Bane", "Lungorthin", "Sjpardach", "Demons of Agbrand, Leahy", "Demons of Agbrand, Mourfuin", "Demons of Agbrand, Bazard", "Wind of Taurung, Aur", "Wind of Taurung, Kax", "Wind of Taurung, Eus", "Wind of Taurung, Gan", "Wind of Taurung, Ior", "Wind of Taurung, Kel"],
+    "Named Dragons": ["Agburanar", "Ando-anca", "Culgor", "Emburghidspo", "Goestir", "Huanrith", "Hyarlóca", "Kipaar", "Lamirtanc", "Lastalaika", "Merkampa", "Niocepa", "Scatha", "Lomaw", "Nimanaur", "Bairanax", "Daoloman", "Dyaca", "Khuzadrepa", "Ancalagon", "Angurth", "Glaurung", "Iargan", "Leucaruth", "Ruingurth", "Smaug", "Throkmaw", "Uthuial", "Itangast"],
+    "Named Monsters": ["Ungoliant", "Thuringwethil", "Fell Beast (named)", "Daelosha", "Erna Sarah", "Shelob", "Caran-Carach", "Carcharoth", "Drauguin"],
     "Orcs & Evil Humanoids": ["Orc, Weak", "Orc, Medium", "Orc, Strong", "Uruk-hai", "Olog-hai", "Half-orc", "Half-troll"],
-    "Tolkien Monsters": ["Troll", "Wild Troll", "Warg", "Fell Beast", "Nazgul", "Balrog", "Dragon", "Giant", "Huorn", "Ent (Onodrim)", "Mumakil", "Kraken, Small", "Kraken, Large", "Spider, Great", "Spider, Huge", "Vampire", "Werewolf", "Festitycellyn"],
-    "Undead": ["Wight, Minor", "Wight, Lesser", "Wight, Major"],
-    "Animals": ["Wolf", "Bear, Large", "Bear, Giant", "Dog, Large", "Horse, Large", "Shark, Large", "Snake, Large", "Boar", "Elk", "Bull", "Cat, Large"],
-    "Flying Creatures": ["Crebain", "Eagles, Great", "Hummerthorn", "Mewlip"],
     "Generic NPCs": ["Guard (Town)", "Guard (Elite)", "Bandit", "Bandit Leader", "Thief", "Peasant", "Soldier (Gondor)", "Knight (Gondor)", "Rider of Rohan", "Easterling Warrior", "Haradrim Archer", "Dunlending Raider", "Corsair Sailor"],
-    "Evil Spell Users": ["Dark Sorcerer (L5)", "Dark Sorcerer (L10)"]
+    "Evil Spell Users": ["Dark Sorcerer (L5)", "Dark Sorcerer (L10)", "Nazgul"]
 };
