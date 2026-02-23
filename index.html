@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MERP GM Assistant</title>
+    <link rel="stylesheet" href="merp-style.css">
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- HEADER & NAVIGATION -->
+<!-- ============================================================ -->
+<div class="app-header">
+    <div>
+        <div class="app-title">MERP GM Assistant</div>
+        <div class="app-subtitle">Middle-earth Role Playing - 2nd Edition</div>
+    </div>
+    <div class="nav-tabs">
+        <div class="nav-tab active" data-tab="characters">Characters</div>
+        <div class="nav-tab" data-tab="combat">Combat</div>
+        <div class="nav-tab" data-tab="battle">Battle</div>
+        <div class="nav-tab" data-tab="spells">Spells</div>
+        <div class="nav-tab" data-tab="attack-tables">Attack</div>
+        <div class="nav-tab" data-tab="critical-tables">Criticals</div>
+        <div class="nav-tab" data-tab="reference">Reference</div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- MAIN CONTENT -->
+<!-- ============================================================ -->
+<div class="app-content">
+
+    <!-- ======================================================== -->
+    <!-- CHARACTERS TAB -->
+    <!-- ======================================================== -->
+    <div id="tab-characters" class="tab-panel active">
+        <!-- Character selector bar -->
+        <div class="flex-row flex-between mb-2">
+            <div class="char-selector" id="charSelector">
+                <span class="char-chip" style="opacity:0.5">No characters yet</span>
+            </div>
+            <div class="flex-row">
+                <button class="btn btn-primary" onclick="App.newCharacter()">+ New Character</button>
+                <button class="btn btn-primary btn-sm" onclick="App.importCharacter()">Import</button>
+                <button class="btn btn-primary btn-sm" onclick="App.exportCharacter()">Export</button>
+            </div>
+        </div>
+
+        <!-- Character Creation Wizard -->
+        <div id="charWizard" style="display:none;">
+            <div class="step-indicator" id="stepIndicator"></div>
+
+            <!-- Step 1: Basic Info & Stats -->
+            <div id="wizStep1" class="panel" style="display:none;">
+                <div class="panel-title">Step 1: Generate Stats</div>
+                <p class="mb-1" style="color:var(--text-secondary);">Roll or assign values (1-100) for each stat. Click "Roll All" to generate random values.</p>
+                <div class="flex-row mb-2">
+                    <button class="btn btn-primary" onclick="App.rollAllStats()">Roll All Stats</button>
+                    <button class="btn btn-sm btn-primary" onclick="App.rerollStat()" id="rerollBtn" style="display:none">Re-roll Selected</button>
+                </div>
+                <div class="grid-6" id="statInputs"></div>
+                <div class="mt-2 flex-row">
+                    <button class="btn btn-success" onclick="App.wizardNext()">Next: Choose Race</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Race Selection -->
+            <div id="wizStep2" class="panel" style="display:none;">
+                <div class="panel-title">Step 2: Choose Race / Culture</div>
+                <div class="grid-2">
+                    <div>
+                        <h4 style="color:var(--text-heading);margin-bottom:8px;">Non-Mannish</h4>
+                        <div class="choice-grid" id="raceChoicesNonMannish"></div>
+                    </div>
+                    <div>
+                        <h4 style="color:var(--text-heading);margin-bottom:8px;">Mannish</h4>
+                        <div class="choice-grid" id="raceChoicesMannish"></div>
+                    </div>
+                </div>
+                <div id="raceDetails" class="card mt-2" style="display:none;"></div>
+                <div class="mt-2 flex-row">
+                    <button class="btn btn-sm" onclick="App.wizardPrev()">Back</button>
+                    <button class="btn btn-success" onclick="App.wizardNext()">Next: Choose Profession</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Profession Selection -->
+            <div id="wizStep3" class="panel" style="display:none;">
+                <div class="panel-title">Step 3: Choose Profession</div>
+                <div class="choice-grid" id="profChoices"></div>
+                <div id="profDetails" class="card mt-2" style="display:none;"></div>
+                <div class="mt-2 flex-row">
+                    <button class="btn btn-sm" onclick="App.wizardPrev()">Back</button>
+                    <button class="btn btn-success" onclick="App.wizardNext()">Next: Skills</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Skills / Apprenticeship -->
+            <div id="wizStep4" class="panel" style="display:none;">
+                <div class="panel-title">Step 4: Spend Development Points (Apprenticeship)</div>
+                <div class="flex-row mb-1">
+                    <span style="color:var(--text-heading);font-size:15px;">Development Points: <strong id="dpRemaining">0</strong> / <span id="dpTotal">0</span></span>
+                </div>
+                <div class="scroll-area" id="skillGrid"></div>
+                <div class="mt-2 flex-row">
+                    <button class="btn btn-sm" onclick="App.wizardPrev()">Back</button>
+                    <button class="btn btn-success" onclick="App.wizardNext()">Next: Details & Finish</button>
+                </div>
+            </div>
+
+            <!-- Step 5: Details & Finish -->
+            <div id="wizStep5" class="panel" style="display:none;">
+                <div class="panel-title">Step 5: Character Details</div>
+                <div class="grid-3">
+                    <div class="flex-col">
+                        <label>Name</label>
+                        <input type="text" id="charName" placeholder="Character name...">
+                    </div>
+                    <div class="flex-col">
+                        <label>Gender</label>
+                        <select id="charGender"><option>Male</option><option>Female</option><option>Other</option></select>
+                    </div>
+                    <div class="flex-col">
+                        <label>Age</label>
+                        <input type="number" id="charAge" value="25" style="width:100%">
+                    </div>
+                </div>
+                <div class="grid-4 mt-1">
+                    <div class="flex-col"><label>Height</label><input type="text" id="charHeight" placeholder="5'10&quot;"></div>
+                    <div class="flex-col"><label>Weight</label><input type="text" id="charWeight" placeholder="170 lbs"></div>
+                    <div class="flex-col"><label>Hair</label><input type="text" id="charHair" placeholder="Brown"></div>
+                    <div class="flex-col"><label>Eyes</label><input type="text" id="charEyes" placeholder="Blue"></div>
+                </div>
+                <div class="grid-2 mt-1">
+                    <div class="flex-col"><label>Demeanor</label><input type="text" id="charDemeanor" placeholder="Brave and stoic"></div>
+                    <div class="flex-col"><label>Alignment</label>
+                        <select id="charAlignment"><option>Good</option><option>Neutral</option><option>Evil</option></select>
+                    </div>
+                </div>
+                <div class="mt-2 flex-row">
+                    <button class="btn btn-sm" onclick="App.wizardPrev()">Back</button>
+                    <button class="btn btn-success btn-lg" onclick="App.finishCharacter()">Create Character</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Character Sheet View (shown after creation or when selecting existing char) -->
+        <div id="charSheet" style="display:none;">
+            <!-- Normal character sheet content (hidden during level-up) -->
+            <div id="charSheetContent">
+                <div class="grid-2">
+                    <!-- Left column: Stats & Info -->
+                    <div>
+                        <div class="panel">
+                            <div class="panel-title" id="sheetName">Character Name</div>
+                            <div class="flex-row flex-between mb-1">
+                                <span id="sheetRaceProf" style="color:var(--text-secondary)"></span>
+                                <span id="sheetLevel" style="color:var(--text-heading)"></span>
+                            </div>
+                            <div class="grid-6 mb-1" id="sheetStats"></div>
+                            <div class="grid-3 mt-1">
+                                <div class="stat-block"><div class="stat-label">Hit Points</div><div class="stat-value" id="sheetHP">0</div></div>
+                                <div class="stat-block"><div class="stat-label">Power Points</div><div class="stat-value" id="sheetPP">0</div></div>
+                                <div class="stat-block"><div class="stat-label">Def Bonus</div><div class="stat-value" id="sheetDB">0</div></div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-title">Resistance Bonuses</div>
+                            <div class="grid-4" id="sheetRR"></div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-title">Languages</div>
+                            <div id="sheetLanguages"></div>
+                        </div>
+                        <div class="panel" id="sheetSpellListsPanel" style="display:none;">
+                            <div class="panel-title">Known Spell Lists</div>
+                            <div id="sheetSpellLists" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+                        </div>
+                    </div>
+                    <!-- Right column: Skills -->
+                    <div>
+                        <div class="panel">
+                            <div class="panel-title">Skills</div>
+                            <div class="scroll-area" id="sheetSkills" style="max-height:600px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel" id="sheetLevelHistoryPanel" style="display:none;">
+                    <div class="panel-title">Level Progression</div>
+                    <div id="sheetLevelHistory"></div>
+                </div>
+                <div class="flex-row mt-1">
+                    <button class="btn btn-primary" id="btnLevelUp" onclick="App.levelUpCharacter()">Level Up</button>
+                    <button class="btn btn-danger btn-sm" onclick="App.deleteCharacter()">Delete Character</button>
+                </div>
+            </div>
+
+            <!-- Level-Up Panel (shown during level-up, hidden by default) -->
+            <div id="levelUpPanel" style="display:none;">
+                <div class="panel">
+                    <div class="panel-title" style="font-size:18px;">Level Up!</div>
+                    <div class="flex-row flex-between mb-1">
+                        <span id="levelUpInfo" style="color:var(--text-heading);font-size:15px;"></span>
+                        <span style="color:var(--text-heading);font-size:15px;">
+                            Skill DP: <strong id="luDpRemaining">0</strong> / <span id="luDpTotal">0</span>
+                        </span>
+                    </div>
+                    <div id="levelUpHpInfo" class="card mb-1" style="color:var(--accent-green);padding:8px 12px;"></div>
+                </div>
+
+                <!-- Skill Development -->
+                <div class="panel">
+                    <div class="panel-title">Develop Skills</div>
+                    <p style="color:var(--text-secondary);font-size:12px;margin:0 0 8px 0;">
+                        Max 2 ranks per skill per level (Movement &amp; Maneuver: unlimited). Use &minus; to undo.
+                    </p>
+                    <div class="scroll-area" id="levelUpSkillGrid" style="max-height:500px;"></div>
+                </div>
+
+                <!-- Spell List Acquisition (only for spell users) -->
+                <div id="levelUpSpellSection" class="panel" style="display:none;">
+                    <div class="panel-title">Learn Spell Lists</div>
+                    <p style="color:var(--text-secondary);font-size:12px;margin:0 0 8px 0;">
+                        Allocate Spell List DP to learn new lists. Each DP gives 20% chance; 5 DP = auto-learn.
+                        Unlearned progress carries over to the next level.
+                    </p>
+                    <div id="levelUpSpellLists"></div>
+                </div>
+
+                <!-- Confirmation -->
+                <div class="flex-row mt-1" style="gap:12px;">
+                    <button class="btn btn-success" onclick="App.confirmLevelUp()" style="font-size:15px;padding:10px 24px;">
+                        Complete Level Up
+                    </button>
+                    <button class="btn btn-danger btn-sm" onclick="App.cancelLevelUp()">
+                        Cancel Level Up
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- COMBAT TAB -->
+    <!-- ======================================================== -->
+    <div id="tab-combat" class="tab-panel">
+        <!-- Attacker & Defender Source Selection -->
+        <div class="grid-2 mb-1">
+            <!-- ATTACKER SOURCE -->
+            <div class="panel" style="margin-bottom:8px;">
+                <div class="panel-title" style="font-size:14px;padding-bottom:4px;margin-bottom:8px;">Attacker Source</div>
+                <div class="flex-row gap-sm mb-1">
+                    <label><input type="radio" name="atkSource" value="manual" checked onchange="App.switchAttackerSource()"> Manual</label>
+                    <label><input type="radio" name="atkSource" value="character" onchange="App.switchAttackerSource()"> Character</label>
+                    <label><input type="radio" name="atkSource" value="npc" onchange="App.switchAttackerSource()"> NPC/Creature</label>
+                </div>
+                <!-- Character attacker -->
+                <div id="atkCharPanel" style="display:none;" class="card">
+                    <select id="atkCharSelect" onchange="App.loadAttackerFromChar()" style="width:100%">
+                        <option value="">-- Select Character --</option>
+                    </select>
+                    <div id="atkCharInfo" style="font-size:11px;color:var(--text-secondary);margin-top:4px;"></div>
+                </div>
+                <!-- NPC attacker -->
+                <div id="atkNpcPanel" style="display:none;" class="card">
+                    <select id="atkNpcSelect" onchange="App.loadAttackerFromNPC()" style="width:100%">
+                        <option value="">-- Select NPC/Creature --</option>
+                    </select>
+                    <div id="atkNpcInfo" style="font-size:11px;color:var(--text-secondary);margin-top:4px;"></div>
+                </div>
+            </div>
+            <!-- DEFENDER SOURCE -->
+            <div class="panel" style="margin-bottom:8px;">
+                <div class="panel-title" style="font-size:14px;padding-bottom:4px;margin-bottom:8px;">Defender Source</div>
+                <div class="flex-row gap-sm mb-1">
+                    <label><input type="radio" name="defSource" value="manual" checked onchange="App.switchDefenderSource()"> Manual</label>
+                    <label><input type="radio" name="defSource" value="character" onchange="App.switchDefenderSource()"> Character</label>
+                    <label><input type="radio" name="defSource" value="npc" onchange="App.switchDefenderSource()"> NPC/Creature</label>
+                </div>
+                <!-- Character defender -->
+                <div id="defCharPanel" style="display:none;" class="card">
+                    <select id="defCharSelect" onchange="App.loadDefenderFromChar()" style="width:100%">
+                        <option value="">-- Select Character --</option>
+                    </select>
+                    <div id="defCharInfo" style="font-size:11px;color:var(--text-secondary);margin-top:4px;"></div>
+                </div>
+                <!-- NPC defender -->
+                <div id="defNpcPanel" style="display:none;" class="card">
+                    <select id="defNpcSelect" onchange="App.loadDefenderFromNPC()" style="width:100%">
+                        <option value="">-- Select NPC/Creature --</option>
+                    </select>
+                    <div id="defNpcInfo" style="font-size:11px;color:var(--text-secondary);margin-top:4px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <!-- Left: Attack Resolution -->
+            <div>
+                <div class="panel">
+                    <div class="panel-title">Attack Resolution</div>
+
+                    <!-- Attack Type Toggle -->
+                    <div class="flex-row gap-sm mb-1">
+                        <label><input type="radio" name="attackType" value="melee" checked onchange="App.switchAttackType()"> Melee/Missile</label>
+                        <label><input type="radio" name="attackType" value="spell" onchange="App.switchAttackType()"> Spell Attack</label>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="flex-col">
+                            <label>Attacker OB (Total)</label>
+                            <input type="number" id="combatOB" value="50" style="width:100%">
+                        </div>
+                        <div class="flex-col">
+                            <label>Defender DB (Total)</label>
+                            <input type="number" id="combatDB" value="20" style="width:100%">
+                        </div>
+                    </div>
+
+                    <!-- Melee/Missile Panel -->
+                    <div id="meleePanel">
+                        <div class="grid-2 mt-1">
+                            <div class="flex-col">
+                                <label>Weapon</label>
+                                <select id="combatWeapon"></select>
+                            </div>
+                            <div class="flex-col">
+                                <label>Attack Table</label>
+                                <select id="combatTable">
+                                    <option value="AT1">AT-1: 1H Slashing</option>
+                                    <option value="AT2">AT-2: 1H Concussion</option>
+                                    <option value="AT3">AT-3: 2-Handed</option>
+                                    <option value="AT4">AT-4: Missile</option>
+                                    <option value="AT5">AT-5: Tooth & Claw</option>
+                                    <option value="AT6">AT-6: Grappling</option>
+                                    <option value="AT7">AT-7: Bolt Spells</option>
+                                    <option value="AT8">AT-8: Ball Spells</option>
+                                    <option value="AT9">AT-9: Base Spells</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Spell Attack Panel -->
+                    <div id="spellPanel" style="display:none;">
+                        <div class="grid-2 mt-1">
+                            <div class="flex-col">
+                                <label>Spell List</label>
+                                <select id="spellListSelect" onchange="App.updateSpellSelect()">
+                                    <option value="">-- Select List --</option>
+                                </select>
+                            </div>
+                            <div class="flex-col">
+                                <label>Spell</label>
+                                <select id="spellSelect" onchange="App.onSpellSelected()">
+                                    <option value="">-- Select Spell --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid-2 mt-1">
+                            <div class="flex-col">
+                                <label>Preparation Rounds</label>
+                                <select id="spellPrepRounds">
+                                    <option value="0">0 rounds (-30)</option>
+                                    <option value="1">1 round (-15)</option>
+                                    <option value="2" selected>2 rounds (+0)</option>
+                                    <option value="3">3 rounds (+10)</option>
+                                    <option value="4">4+ rounds (+20)</option>
+                                </select>
+                            </div>
+                            <div class="flex-col">
+                                <label>Attack Table</label>
+                                <select id="spellAttackTable" disabled>
+                                    <option value="AT7">AT-7: Bolt Spells (DE)</option>
+                                    <option value="AT8">AT-8: Ball Spells (BE)</option>
+                                    <option value="AT9">AT-9: Base Spells (F/RR)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="spellInfo" class="card mt-1" style="display:none;">
+                            <div style="font-size:11px;color:var(--text-secondary);" id="spellInfoText"></div>
+                        </div>
+                    </div>
+
+                    <div class="grid-2 mt-1">
+                        <div class="flex-col">
+                            <label>Defender Armor</label>
+                            <select id="combatArmor">
+                                <option>Plate</option>
+                                <option>Chain</option>
+                                <option>Rigid Leather</option>
+                                <option>Soft Leather</option>
+                                <option selected>No Armor</option>
+                            </select>
+                        </div>
+                        <div class="flex-col">
+                            <label>Dice Roll (blank = auto-roll)</label>
+                            <input type="number" id="combatRoll" placeholder="Enter roll or leave blank" style="width:100%">
+                        </div>
+                    </div>
+
+                    <!-- Combat Modifiers -->
+                    <div class="card mt-1">
+                        <div style="font-size:12px;color:var(--text-heading);margin-bottom:6px;">Situational Modifiers</div>
+                        <div class="grid-3 gap-sm">
+                            <label><input type="checkbox" id="modFlank"> Flank (+15)</label>
+                            <label><input type="checkbox" id="modRear"> Rear (+20)</label>
+                            <label><input type="checkbox" id="modSurprised"> Surprised (+20)</label>
+                            <label><input type="checkbox" id="modStunned"> Stunned/Down (+20)</label>
+                            <label><input type="checkbox" id="modDrawing"> Drawing Weapon (-30)</label>
+                            <label><input type="checkbox" id="modHalfHits"> Half Hits Taken (-20)</label>
+                        </div>
+                        <div class="flex-row mt-1 gap-sm">
+                            <label style="white-space:nowrap">Custom Mod:</label>
+                            <input type="number" id="modCustom" value="0" style="width:80px">
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <button class="btn btn-primary btn-lg" onclick="App.resolveAttack()" style="width:100%">Resolve Attack</button>
+                    </div>
+                </div>
+
+                <!-- Quick Critical Roll -->
+                <div class="panel">
+                    <div class="panel-title">Quick Critical Roll</div>
+                    <div class="grid-3">
+                        <div class="flex-col">
+                            <label>Critical Type</label>
+                            <select id="critType">
+                                <option>Crush</option><option>Slash</option><option>Puncture</option>
+                                <option>Unbalancing</option><option>Grappling</option>
+                                <option>Heat</option><option>Cold</option>
+                                <option>Electricity</option><option>Impact</option>
+                                <option>Large Creature</option><option>Large Spell</option>
+                            </select>
+                        </div>
+                        <div class="flex-col">
+                            <label>Severity</label>
+                            <select id="critSeverity">
+                                <option value="T">T (Tiny, -50)</option>
+                                <option value="A">A (-20)</option>
+                                <option value="B">B (-10)</option>
+                                <option value="C" selected>C (+0)</option>
+                                <option value="D">D (+10)</option>
+                                <option value="E">E (+20)</option>
+                            </select>
+                        </div>
+                        <div class="flex-col">
+                            <label>Roll (blank = auto)</label>
+                            <input type="number" id="critRoll" placeholder="Roll..." style="width:100%">
+                        </div>
+                    </div>
+                    <button class="btn btn-danger mt-1" onclick="App.resolveCritical()" style="width:100%">Roll Critical</button>
+                </div>
+
+                <!-- Quick Fumble Roll -->
+                <div class="panel">
+                    <div class="panel-title">Quick Fumble Roll</div>
+                    <div class="grid-3">
+                        <div class="flex-col">
+                            <label>Fumble Table</label>
+                            <select id="fumbleTable">
+                                <option value="1">FT-1: Hand Arms</option>
+                                <option value="2">FT-2: Missile</option>
+                                <option value="3">FT-3: Spell Failure</option>
+                                <option value="4">FT-4: Moving Maneuver</option>
+                            </select>
+                        </div>
+                        <div class="flex-col">
+                            <label>Modifier</label>
+                            <input type="number" id="fumbleMod" value="0" style="width:100%">
+                        </div>
+                        <div class="flex-col">
+                            <label>Roll (blank = auto)</label>
+                            <input type="number" id="fumbleRoll" placeholder="Roll..." style="width:100%">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mt-1" onclick="App.resolveFumble()" style="width:100%">Roll Fumble</button>
+                </div>
+
+                <!-- Quick Resistance Roll -->
+                <div class="panel">
+                    <div class="panel-title">Quick Resistance Roll</div>
+                    <div class="grid-4">
+                        <div class="flex-col">
+                            <label>Target Level</label>
+                            <input type="number" id="rrTargetLevel" value="5" style="width:100%">
+                        </div>
+                        <div class="flex-col">
+                            <label>Attack Level</label>
+                            <input type="number" id="rrAttackLevel" value="5" style="width:100%">
+                        </div>
+                        <div class="flex-col">
+                            <label>Target RR Bonus</label>
+                            <input type="number" id="rrBonus" value="0" style="width:100%">
+                        </div>
+                        <div class="flex-col">
+                            <label>Roll (blank = auto)</label>
+                            <input type="number" id="rrRoll" placeholder="Roll..." style="width:100%">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mt-1" onclick="App.resolveRR()" style="width:100%">Roll Resistance</button>
+                </div>
+            </div>
+
+            <!-- Right: Results -->
+            <div>
+                <div class="panel">
+                    <div class="panel-title">Combat Results</div>
+                    <div id="combatResults">
+                        <div style="color:var(--text-secondary);text-align:center;padding:40px;">
+                            Resolve an attack to see results here.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-title">Combat Log</div>
+                    <div class="scroll-area" id="combatLog" style="max-height:300px;font-size:12px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- BATTLE TAB -->
+    <!-- ======================================================== -->
+    <div id="tab-battle" class="tab-panel">
+
+        <!-- SETUP PHASE -->
+        <div id="battleSetup">
+            <div class="panel">
+                <div class="panel-title">Battle Setup</div>
+                <p style="color:var(--text-secondary);font-size:12px;margin:0 0 12px 0;">
+                    Add characters and NPCs to the encounter, then start the battle. Turn order follows MERP rules (Movement &amp; Maneuver Bonus).
+                </p>
+
+                <div class="grid-3 mb-2">
+                    <!-- Add PC -->
+                    <div class="card">
+                        <div style="color:var(--text-heading);font-size:13px;font-weight:bold;margin-bottom:8px;">Add Player Character</div>
+                        <select id="battlePCSelect" style="width:100%;margin-bottom:6px;">
+                            <option value="">-- Select Character --</option>
+                        </select>
+                        <button class="btn btn-primary btn-sm" onclick="App.battleAddPCFromSelect()" style="width:100%">Add PC</button>
+                    </div>
+
+                    <!-- Add NPC -->
+                    <div class="card">
+                        <div style="color:var(--text-heading);font-size:13px;font-weight:bold;margin-bottom:8px;">Add NPC / Creature</div>
+                        <select id="battleNPCSelect" style="width:100%;margin-bottom:6px;">
+                            <option value="">-- Select NPC --</option>
+                        </select>
+                        <div class="flex-row gap-sm">
+                            <label style="white-space:nowrap;margin:0;">Count:</label>
+                            <input type="number" id="battleNPCCount" value="1" min="1" max="20" style="width:60px;">
+                            <button class="btn btn-primary btn-sm" onclick="App.battleAddNPCFromSelect()" style="flex:1;">Add NPC</button>
+                        </div>
+                    </div>
+
+                    <!-- Add Custom -->
+                    <div class="card">
+                        <div style="color:var(--text-heading);font-size:13px;font-weight:bold;margin-bottom:8px;">Add Custom Combatant</div>
+                        <div class="grid-2 gap-sm" style="margin-bottom:6px;">
+                            <input type="text" id="battleCustomName" placeholder="Name" style="width:100%">
+                            <input type="number" id="battleCustomHP" placeholder="HP" style="width:100%">
+                        </div>
+                        <div class="grid-4 gap-sm" style="margin-bottom:6px;">
+                            <input type="number" id="battleCustomInitMod" placeholder="M&M Bonus" value="0" style="width:100%">
+                            <input type="number" id="battleCustomOB" placeholder="OB" value="0" style="width:100%">
+                            <input type="number" id="battleCustomDB" placeholder="DB" value="0" style="width:100%">
+                            <select id="battleCustomTeam" style="width:100%">
+                                <option value="ally">Ally</option>
+                                <option value="enemy">Enemy</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary btn-sm" onclick="App.battleAddCustomFromForm()" style="width:100%">Add Custom</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roster -->
+            <div class="panel">
+                <div class="panel-title">Encounter Roster</div>
+                <div id="battleRoster">
+                    <div style="color:var(--text-secondary);text-align:center;padding:20px;">
+                        No combatants added yet. Use the controls above to add PCs, NPCs, or custom combatants.
+                    </div>
+                </div>
+                <div class="mt-2 flex-row flex-between">
+                    <button class="btn btn-success btn-lg" onclick="App.battleStart()" id="battleStartBtn" disabled>
+                        Start Battle
+                    </button>
+                    <button class="btn btn-danger btn-sm" onclick="App.battleClearRoster()">Clear All</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RUNNING PHASE (hidden by default) -->
+        <div id="battleRunning" style="display:none;">
+            <!-- Round Header -->
+            <div class="panel battle-round-header">
+                <div class="flex-row flex-between">
+                    <div>
+                        <span style="font-size:18px;color:var(--text-heading);font-family:var(--font-heading);">
+                            Round <strong id="battleRoundNum">1</strong>
+                        </span>
+                        <span id="battleTurnInfo" style="color:var(--text-secondary);margin-left:12px;"></span>
+                    </div>
+                    <div class="flex-row">
+                        <button class="btn btn-sm" onclick="App.battleUndo()" id="battleUndoBtn" disabled style="opacity:0.4;">&#8630; Undo</button>
+                        <button class="btn btn-primary" onclick="App.battleNextTurn()">Next Turn &rarr;</button>
+                        <button class="btn btn-danger btn-sm" onclick="App.battleEndBattle()">End Battle</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <!-- Left: Initiative Order -->
+                <div>
+                    <div class="panel">
+                        <div class="panel-title">Turn Order (M&M Bonus)</div>
+                        <div id="battleInitiativeList" class="scroll-area" style="max-height:600px;"></div>
+                    </div>
+                </div>
+
+                <!-- Right: Detail Panel -->
+                <div>
+                    <div class="panel" id="battleDetailPanel">
+                        <div class="panel-title">Combatant Details</div>
+                        <div id="battleDetailContent">
+                            <div style="color:var(--text-secondary);text-align:center;padding:40px;">
+                                Click a combatant to view details.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Battle Log -->
+            <div class="panel">
+                <div class="panel-title">Battle Log</div>
+                <div class="scroll-area" id="battleLog" style="max-height:200px;font-size:12px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SPELLS TAB -->
+    <!-- ======================================================== -->
+    <div id="tab-spells" class="tab-panel">
+        <div class="panel">
+            <div class="panel-title">Spell Lists Reference</div>
+            <div id="spellsTableDisplay"></div>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- ATTACK TABLES TAB -->
+    <!-- ======================================================== -->
+    <div id="tab-attack-tables" class="tab-panel">
+        <div class="panel">
+            <div class="panel-title">Attack Tables</div>
+            <div class="flex-row mb-2">
+                <select id="attackTableSelect" onchange="App.showAttackTable()" style="width:300px;">
+                    <option value="AT1">AT-1: 1-H Slashing Weapons</option>
+                    <option value="AT2">AT-2: 1-H Concussion Weapons</option>
+                    <option value="AT3">AT-3: 2-Handed Weapons</option>
+                    <option value="AT4">AT-4: Missile Weapons</option>
+                    <option value="AT5">AT-5: Tooth & Claw</option>
+                    <option value="AT6">AT-6: Grappling & Unbalancing</option>
+                    <option value="AT7">AT-7: Bolt Spells (Directed)</option>
+                    <option value="AT8">AT-8: Ball Spells (Elemental)</option>
+                    <option value="AT9">AT-9: Base Spells (Force/RR)</option>
+                </select>
+            </div>
+            <div id="attackTableDisplay"></div>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- CRITICAL TABLES TAB -->
+    <!-- ======================================================== -->
+    <div id="tab-critical-tables" class="tab-panel">
+        <div class="panel">
+            <div class="panel-title">Critical Tables</div>
+            <div class="flex-row mb-2">
+                <select id="criticalTableSelect" onchange="App.showCriticalTable()" style="width:300px;">
+                    <option value="CT1">CT-1: Crush</option>
+                    <option value="CT2">CT-2: Slash</option>
+                    <option value="CT3">CT-3: Puncture</option>
+                    <option value="CT4">CT-4: Unbalancing</option>
+                    <option value="CT5">CT-5: Grappling</option>
+                    <option value="CT6">CT-6: Heat</option>
+                    <option value="CT7">CT-7: Cold</option>
+                    <option value="CT8">CT-8: Electricity</option>
+                    <option value="CT9">CT-9: Impact</option>
+                    <option value="CT10">CT-10: Large Creature Physical</option>
+                    <option value="CT11">CT-11: Large Creature Spell</option>
+                </select>
+            </div>
+            <div id="criticalTableDisplay"></div>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- REFERENCE TAB -->
+    <!-- ======================================================== -->
+    <div id="tab-reference" class="tab-panel">
+        <div class="panel">
+            <div class="panel-title">Reference Tables & Data</div>
+            <div class="flex-row mb-2">
+                <select id="referenceTableSelect" onchange="App.showReferenceTable()" style="width:300px;">
+                    <optgroup label="Fumble Tables">
+                        <option value="FT1">FT-1: Hand Arms Fumble</option>
+                        <option value="FT2">FT-2: Missile Weapons Fumble</option>
+                        <option value="FT3">FT-3: Spell Failure</option>
+                        <option value="FT4">FT-4: Moving Maneuver Failure</option>
+                    </optgroup>
+                    <optgroup label="Reference Data">
+                        <option value="weapons">Weapons Statistics (CST-1)</option>
+                        <option value="npcTemplates">NPC / Creature Templates (ST-2)</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div id="referenceTableDisplay"></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Scripts (order matters: data first, then logic, then UI) -->
+<script src="merp-data.js"></script>
+<script src="merp-tables-attack.js"></script>
+<script src="merp-tables-critical.js"></script>
+<script src="merp-tables-chargen.js"></script>
+<script src="merp-spells-npcs.js"></script>
+<script src="merp-character.js"></script>
+<script src="merp-combat.js"></script>
+<script src="merp-app.js"></script>
+<script src="merp-battle.js"></script>
+</body>
+</html>
