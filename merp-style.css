@@ -756,6 +756,7 @@ input[type="checkbox"] {
 .battle-status-tag.status-immobilized { background: rgba(140, 60, 180, 0.2); border-color: #8040a0; color: #c080e0; }
 .battle-status-tag.status-dazed { background: rgba(100, 140, 200, 0.2); border-color: #4080c0; color: #80b0e0; }
 .battle-status-tag.status-default { background: rgba(120, 120, 120, 0.2); border-color: #808080; color: #b0b0b0; }
+.battle-status-tag.status-pending { opacity: 0.55; border-style: dashed; }
 
 .battle-init-num {
     font-size: 18px;

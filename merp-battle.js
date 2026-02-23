@@ -594,8 +594,10 @@ App.battleRenderInitiativeList = function() {
             statusHtml = '<div style="margin-top:2px;">';
             for (const eff of c.statusEffects) {
                 const cssClass = this._statusCssClass(eff.name);
-                const roundsText = eff.roundsLeft < 0 ? '' : ` (${eff.roundsLeft}r)`;
-                statusHtml += `<span class="battle-status-tag ${cssClass}">${eff.name}${roundsText}</span>`;
+                const isPending = eff.pendingTicks > 0;
+                const pendingTag = isPending ? ' ⏳' : '';
+                const roundsText = eff.roundsLeft < 0 ? '' : eff.roundsLeft === 0 ? ' (last)' : ` (${eff.roundsLeft}r)`;
+                statusHtml += `<span class="battle-status-tag ${cssClass}${isPending ? ' status-pending' : ''}">${eff.name}${roundsText}${pendingTag}</span>`;
             }
             statusHtml += '</div>';
         }
@@ -653,10 +655,12 @@ App.battleRenderDetail = function() {
         for (let si = 0; si < c.statusEffects.length; si++) {
             const eff = c.statusEffects[si];
             const cssClass = this._statusCssClass(eff.name);
-            const roundsText = eff.roundsLeft < 0 ? 'Permanent' : `${eff.roundsLeft} round${eff.roundsLeft !== 1 ? 's' : ''} left`;
+            const isPending = eff.pendingTicks > 0;
+            const pendingText = isPending ? ' (starts next round)' : '';
+            const roundsText = eff.roundsLeft < 0 ? 'Permanent' : eff.roundsLeft === 0 ? 'Last round' : `${eff.roundsLeft} round${eff.roundsLeft !== 1 ? 's' : ''} left`;
             statusHtml += `<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
-                <span class="battle-status-tag ${cssClass}">${eff.name}</span>
-                <span style="font-size:11px;color:var(--text-secondary);">${roundsText} - ${eff.description}</span>
+                <span class="battle-status-tag ${cssClass}${isPending ? ' status-pending' : ''}">${eff.name}</span>
+                <span style="font-size:11px;color:var(--text-secondary);">${roundsText}${pendingText} - ${eff.description}</span>
                 <button class="btn btn-danger btn-sm" onclick="App.battleRemoveStatus(${c.id}, ${si})" style="padding:1px 6px;font-size:10px;margin-left:auto;">&times;</button>
             </div>`;
         }
@@ -1648,16 +1652,22 @@ App._battleParseCritStatuses = function(target, critText) {
     if (!critText) return;
     const text = critText.toLowerCase();
 
+    // All effects from criticals are "pending" — they take effect starting NEXT round,
+    // not the round in which the critical was scored.
+    // pendingTicks: number of turn-ticks to skip before the effect becomes active.
+    // Set to 1 so the effect skips the target's next turn-tick (rest of current round),
+    // then becomes fully active on the following round.
+
     // Parse "stunned X rounds" patterns
     const stunMatch = text.match(/stun\w*\s+(\d+)\s+r(?:ou)?nd/);
     if (stunMatch) {
         const rounds = parseInt(stunMatch[1]) || 1;
-        target.statusEffects.push({ name: "Stunned", roundsLeft: rounds, description: "Cannot act" });
-        this.battleLog(`${target.name} is stunned for ${rounds} round${rounds > 1 ? 's' : ''} (from critical).`);
+        target.statusEffects.push({ name: "Stunned", roundsLeft: rounds, description: "Cannot act", pendingTicks: 1 });
+        this.battleLog(`${target.name} is stunned for ${rounds} round${rounds > 1 ? 's' : ''} (from critical, starts next round).`);
     } else if (text.includes('stun') && !text.includes('no stun')) {
         // Generic stun without round count
-        target.statusEffects.push({ name: "Stunned", roundsLeft: 1, description: "Cannot act" });
-        this.battleLog(`${target.name} is stunned for 1 round (from critical).`);
+        target.statusEffects.push({ name: "Stunned", roundsLeft: 1, description: "Cannot act", pendingTicks: 1 });
+        this.battleLog(`${target.name} is stunned for 1 round (from critical, starts next round).`);
     }
 
     // Parse bleeding / hits per round
@@ -1670,40 +1680,42 @@ App._battleParseCritStatuses = function(target, critText) {
             name: "Bleeding",
             roundsLeft: rounds,
             description: `Loses ${hpPerRound} HP/round`,
-            hpPerRound: hpPerRound
+            hpPerRound: hpPerRound,
+            pendingTicks: 1
         });
-        this.battleLog(`${target.name} is bleeding for ${hpPerRound} HP/round (from critical).`);
+        this.battleLog(`${target.name} is bleeding for ${hpPerRound} HP/round (from critical, starts next round).`);
     } else if (text.includes('bleed') && !text.includes('no bleed')) {
         // Generic bleeding without a specific number
         target.statusEffects.push({
             name: "Bleeding",
             roundsLeft: 3,
             description: "Loses 1 HP/round",
-            hpPerRound: 1
+            hpPerRound: 1,
+            pendingTicks: 1
         });
-        this.battleLog(`${target.name} is bleeding for 1 HP/round (from critical).`);
+        this.battleLog(`${target.name} is bleeding for 1 HP/round (from critical, starts next round).`);
     }
 
     // Parse prone/knocked down
     if (text.includes('prone') || text.includes('knocked down') || text.includes('falls down')) {
-        target.statusEffects.push({ name: "Prone", roundsLeft: 1, description: "Must spend action to stand" });
-        this.battleLog(`${target.name} is knocked prone (from critical).`);
+        target.statusEffects.push({ name: "Prone", roundsLeft: 1, description: "Must spend action to stand", pendingTicks: 1 });
+        this.battleLog(`${target.name} is knocked prone (from critical, starts next round).`);
     }
 
     // Parse broken arm/leg
     if (text.includes('arm broken') || text.includes('breaks arm') || text.includes('arm is broken')) {
-        target.statusEffects.push({ name: "Arm Broken", roundsLeft: -1, description: "Cannot use arm (-50 if weapon arm)" });
-        this.battleLog(`${target.name} has a broken arm (from critical).`);
+        target.statusEffects.push({ name: "Arm Broken", roundsLeft: -1, description: "Cannot use arm (-50 if weapon arm)", pendingTicks: 1 });
+        this.battleLog(`${target.name} has a broken arm (from critical, starts next round).`);
     }
     if (text.includes('leg broken') || text.includes('breaks leg') || text.includes('leg is broken')) {
-        target.statusEffects.push({ name: "Leg Broken", roundsLeft: -1, description: "Cannot move normally" });
-        this.battleLog(`${target.name} has a broken leg (from critical).`);
+        target.statusEffects.push({ name: "Leg Broken", roundsLeft: -1, description: "Cannot move normally", pendingTicks: 1 });
+        this.battleLog(`${target.name} has a broken leg (from critical, starts next round).`);
     }
 
     // Parse unconscious
     if (text.includes('unconscious') || text.includes('pass out') || text.includes('knocked out')) {
-        target.statusEffects.push({ name: "Unconscious", roundsLeft: -1, description: "Out of action" });
-        this.battleLog(`${target.name} is knocked unconscious (from critical).`);
+        target.statusEffects.push({ name: "Unconscious", roundsLeft: -1, description: "Out of action", pendingTicks: 1 });
+        this.battleLog(`${target.name} is knocked unconscious (from critical, starts next round).`);
     }
 };
 
@@ -1851,12 +1863,28 @@ App.battleRemoveStatus = function(id, effectIndex) {
 };
 
 App.battleTickStatuses = function(combatant) {
-    // Called at the START of a combatant's turn
+    // Called at the START of a combatant's turn.
+    //
+    // Timing model:
+    //   pendingTicks > 0 : Effect was recently inflicted and hasn't started yet.
+    //                      Decrement pendingTicks each tick. No other processing.
+    //   pendingTicks = 0 : Effect is ACTIVE this turn. The combatant is affected
+    //                      (stunned, bleeding, etc.) during this turn.
+    //   roundsLeft > 0   : After applying the effect this turn, decrement roundsLeft.
+    //   roundsLeft = 0   : Effect has run its course — remove it at the START of
+    //                      the next tick (so it was still active last turn).
+    //
+    // Example: "Stunned 1 round" inflicted Round 1, pendingTicks=1
+    //   Round 1 (target's turn): pendingTicks 1→0. Effect activates. No other action.
+    //   Round 2 (target's turn): Active. roundsLeft 1→0. Stun applies this turn.
+    //   Round 3 (target's turn): roundsLeft=0 → expired. Stun gone. Target can act.
+
+    // Phase 1: Expire effects that were fully consumed last turn (roundsLeft = 0)
     const expired = [];
     combatant.statusEffects = combatant.statusEffects.filter(eff => {
-        if (eff.roundsLeft < 0) return true;  // Permanent
-        eff.roundsLeft--;
-        if (eff.roundsLeft <= 0) {
+        if (eff.pendingTicks > 0) return true;     // Still pending — don't expire
+        if (eff.roundsLeft < 0) return true;        // Permanent
+        if (eff.roundsLeft === 0) {
             expired.push(eff.name);
             return false;
         }
@@ -1867,9 +1895,34 @@ App.battleTickStatuses = function(combatant) {
         this.battleLog(`${combatant.name}: ${name} has expired.`);
     }
 
-    // Apply bleeding damage for active Bleeding effects
+    // Phase 2: Process pending effects (decrement pendingTicks)
+    // Track which effects just became active so Phase 3 skips them
+    const justActivated = new Set();
     for (const eff of combatant.statusEffects) {
-        if (eff.name === "Bleeding") {
+        if (eff.pendingTicks > 0) {
+            eff.pendingTicks--;
+            if (eff.pendingTicks === 0) {
+                justActivated.add(eff);
+                this.battleLog(`${combatant.name}: ${eff.name} is now active.`);
+            }
+        }
+    }
+
+    // Phase 3: Decrement roundsLeft for active (non-pending) effects
+    // Skip effects that JUST activated this tick — they get their first full turn
+    // before being decremented.
+    for (const eff of combatant.statusEffects) {
+        if (eff.pendingTicks > 0) continue;   // Still pending
+        if (justActivated.has(eff)) continue;  // Just activated — first active turn
+        if (eff.roundsLeft < 0) continue;      // Permanent
+        eff.roundsLeft--;
+        // roundsLeft is now 0 or more. If 0, effect is active THIS turn
+        // but will be expired at the start of NEXT turn.
+    }
+
+    // Phase 4: Apply bleeding damage for active (non-pending, non-just-activated) Bleeding effects
+    for (const eff of combatant.statusEffects) {
+        if (eff.name === "Bleeding" && !(eff.pendingTicks > 0) && !justActivated.has(eff)) {
             // Get HP per round: from hpPerRound field, or parse from description, or default 1
             let bleedDmg = eff.hpPerRound;
             if (!bleedDmg && eff.description) {
