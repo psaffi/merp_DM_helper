@@ -1032,30 +1032,34 @@ MERP.npcTemplates = {
 // NPC CATEGORIES for dropdown grouping
 // ============================================================
 MERP.npcCategories = {
-    "Bats & Birds": ["Great Eagles", "Great Falcons (of Ardor)", "Great Falcons (of Mirkwood)", "Great Bats", "Hunting Bats", "Crebain", "Red Eagles", "Sea Eagles", "Vereut Eagles", "Orao", "Barrow Owl", "Echo Hawks"],
-    "Water Beasts": ["Carnantor", "Cherethrýnd", "Eris Squids", "Merchanthrais", "Mulkánar", "Pike", "Suminrein", "Webs", "Snapper", "Lamprey"],
-    "Reptiles & Amphibians": ["Egil's Vipers", "Marsh Crocodiles (in water)", "Marsh Crocodiles (on land)", "Sea Crocodiles", "Rock Vipers", "Shaking Asps", "Slow-fangs", "Coireals", "Grey Flyers", "Angusaiwéli", "Blue Terrapins", "Marsh Adders", "Amabúch", "Pedalvi"],
-    "Insects": ["Cliff Hornets", "Gélyngyl", "Mabelmaikli", "Neckerbrekers", "Ulcercain"],
-    "Leaf-eaters": ["Kine of Araw", "Mumakil", "Nimfiara", "Caru", "Losrandir", "Wild Goats", "Aurych"],
-    "Riding & Draft Animals": ["Andamundar", "Devevi, runners", "Devevi, workers", "Elven Horses", "Horses of Mordor", "Losandamundar", "Marsh Ponies", "Mearas", "Wild Horses", "Zurukuvi"],
+    // --- Most commonly used in play ---
+    "Generic NPCs": ["Guard (Town)", "Guard (Elite)", "Bandit", "Bandit Leader", "Thief", "Peasant", "Soldier (Gondor)", "Knight (Gondor)", "Rider of Rohan", "Easterling Warrior", "Haradrim Archer", "Dunlending Raider", "Corsair Sailor"],
+    "Orcs & Evil Humanoids": ["Orc, Weak", "Orc, Medium", "Orc, Strong", "Uruk-hai", "Olog-hai", "Half-orc", "Half-troll"],
+    "Evil Spell Users": ["Dark Sorcerer (L5)", "Dark Sorcerer (L10)", "Nazgul"],
+    "Undead": ["Barrow Wights", "Corpse Candles", "Corpse Lanterns", "Ghosts, Lesser", "Ghosts, Greater", "Ghouls, Lesser", "Ghouls, Greater", "Lesinavi", "Mewlips", "Sand Devils", "Skeletons, Minor", "Skeletons, Lesser", "Skeletons, Greater", "Skeletons, Lord", "Specters, Lesser", "Specters, Greater", "Swamp Stars", "Ta-Fa-Lisch", "Wargs", "Werewolves"],
+    "Giants & Trolls": ["Giants", "Trolls, Cave", "Trolls, Forest", "Trolls, Hill", "Trolls, Mountain", "Trolls, Snow", "Trolls, Stone", "Trolls, Black (Olog)"],
+    "Giant Spiders & Insects": ["Giant Spiders, Lesser", "Giant Spiders, Greater", "Hummerhorns", "King Spiders"],
+    // --- Wilderness & wildlife encounters ---
     "Predators": ["Cave Bears", "Blue Bears", "Black Bears", "North Bears", "Sloth Bears", "Spotted Lions", "Cliff Lions", "Dire Wolves, Adult", "Dire Wolves, Young", "Grey Wolves", "Red Wolves", "White Wolves", "War-wolves", "Sheep-Hounds", "Hounds", "Dunmen's Dogs", "Grass Cats", "Highland Lynxes", "Giant Martens", "Merise Tyka", "Red Foxes", "White Foxes", "Vuk", "Yukarlak", "Chetmig", "Black Minks", "Blue Otters", "Death Shrews", "Marsh Mastiffs"],
     "Other Dangerous Animals": ["Boars", "Fen Boars", "Grey Apes", "Majmun", "Slirdu", "Uvag-Aak"],
+    "Reptiles & Amphibians": ["Egil's Vipers", "Marsh Crocodiles (in water)", "Marsh Crocodiles (on land)", "Sea Crocodiles", "Rock Vipers", "Shaking Asps", "Slow-fangs", "Coireals", "Grey Flyers", "Angusaiwéli", "Blue Terrapins", "Marsh Adders", "Amabúch", "Pedalvi"],
+    "Bats & Birds": ["Great Eagles", "Great Falcons (of Ardor)", "Great Falcons (of Mirkwood)", "Great Bats", "Hunting Bats", "Crebain", "Red Eagles", "Sea Eagles", "Vereut Eagles", "Orao", "Barrow Owl", "Echo Hawks"],
+    "Insects": ["Cliff Hornets", "Gélyngyl", "Mabelmaikli", "Neckerbrekers", "Ulcercain"],
+    "Riding & Draft Animals": ["Andamundar", "Devevi, runners", "Devevi, workers", "Elven Horses", "Horses of Mordor", "Losandamundar", "Marsh Ponies", "Mearas", "Wild Horses", "Zurukuvi"],
+    "Leaf-eaters": ["Kine of Araw", "Mumakil", "Nimfiara", "Caru", "Losrandir", "Wild Goats", "Aurych"],
+    "Water Beasts": ["Carnantor", "Cherethrýnd", "Eris Squids", "Merchanthrais", "Mulkánar", "Pike", "Suminrein", "Webs", "Snapper", "Lamprey"],
+    // --- Major monsters ---
+    "Dragons & Drakes": ["Cave Drakes", "Cave Worms", "Cold-drakes", "Ice-drakes", "Land Drakes", "Winged Cold-drakes", "Fire-drakes", "Marsh-drakes", "Rain-drakes", "Water-drakes", "Sand Drakes", "Were-worms"],
+    "Demons": ["Balrogs", "Black Demons", "Lassaraukar, Lesser", "Lassaraukar, Greater", "Vampires of Morgoth"],
+    "Flying Monsters": ["Flying Crebain", "Fell Beasts"],
     "Demonic Water Monsters": ["Demon-whales", "Fell Turtles", "Ninivet", "Red Jaws", "Vodyanoi", "Watcher in the Water"],
     "Evil Huorns & Trees": ["Evil Huorns", "Evil Trees"],
-    "Demons": ["Balrogs", "Black Demons", "Lassaraukar, Lesser", "Lassaraukar, Greater", "Vampires of Morgoth"],
-    "Dragons & Drakes": ["Cave Drakes", "Cave Worms", "Cold-drakes", "Ice-drakes", "Land Drakes", "Winged Cold-drakes", "Fire-drakes", "Marsh-drakes", "Rain-drakes", "Water-drakes", "Sand Drakes", "Were-worms"],
-    "Flying Monsters": ["Flying Crebain", "Fell Beasts"],
-    "Giants & Trolls": ["Giants", "Trolls, Cave", "Trolls, Forest", "Trolls, Hill", "Trolls, Mountain", "Trolls, Snow", "Trolls, Stone", "Trolls, Black (Olog)"],
     "Púkel-Creatures": ["Colbran", "Hurndaen", "Hurnkennec", "Mendaen", "Mensharag", "Púkel-men", "Silent Watchers"],
-    "Giant Spiders & Insects": ["Giant Spiders, Lesser", "Giant Spiders, Greater", "Hummerhorns", "King Spiders"],
-    "Undead": ["Barrow Wights", "Corpse Candles", "Corpse Lanterns", "Ghosts, Lesser", "Ghosts, Greater", "Ghouls, Lesser", "Ghouls, Greater", "Lesinavi", "Mewlips", "Sand Devils", "Skeletons, Minor", "Skeletons, Lesser", "Skeletons, Greater", "Skeletons, Lord", "Specters, Lesser", "Specters, Greater", "Swamp Stars", "Ta-Fa-Lisch", "Wargs", "Werewolves"],
+    // --- Named creatures (unique individuals) ---
     "Named Eagles & Birds": ["Thorondor", "Gwaihir", "Landroval", "Sulroch", "Elroa", "Gilsul", "Roac", "The Old Thrush"],
     "Named Horses": ["Nahar", "Nimros", "Rochallor", "Mordor Horse", "Felaróf", "Shadowfax", "Snowmane"],
     "Named Hounds, Boars & Trees": ["Huan", "Evechar Boar", "Old Man Willow", "Sleeping Klow"],
     "Named Demons": ["Gothmog", "Durin's Bane", "Lungorthin", "Sjpardach", "Demons of Agbrand, Leahy", "Demons of Agbrand, Mourfuin", "Demons of Agbrand, Bazard", "Wind of Taurung, Aur", "Wind of Taurung, Kax", "Wind of Taurung, Eus", "Wind of Taurung, Gan", "Wind of Taurung, Ior", "Wind of Taurung, Kel"],
     "Named Dragons": ["Agburanar", "Ando-anca", "Culgor", "Emburghidspo", "Goestir", "Huanrith", "Hyarlóca", "Kipaar", "Lamirtanc", "Lastalaika", "Merkampa", "Niocepa", "Scatha", "Lomaw", "Nimanaur", "Bairanax", "Daoloman", "Dyaca", "Khuzadrepa", "Ancalagon", "Angurth", "Glaurung", "Iargan", "Leucaruth", "Ruingurth", "Smaug", "Throkmaw", "Uthuial", "Itangast"],
-    "Named Monsters": ["Ungoliant", "Thuringwethil", "Fell Beast (named)", "Daelosha", "Erna Sarah", "Shelob", "Caran-Carach", "Carcharoth", "Drauguin"],
-    "Orcs & Evil Humanoids": ["Orc, Weak", "Orc, Medium", "Orc, Strong", "Uruk-hai", "Olog-hai", "Half-orc", "Half-troll"],
-    "Generic NPCs": ["Guard (Town)", "Guard (Elite)", "Bandit", "Bandit Leader", "Thief", "Peasant", "Soldier (Gondor)", "Knight (Gondor)", "Rider of Rohan", "Easterling Warrior", "Haradrim Archer", "Dunlending Raider", "Corsair Sailor"],
-    "Evil Spell Users": ["Dark Sorcerer (L5)", "Dark Sorcerer (L10)", "Nazgul"]
+    "Named Monsters": ["Ungoliant", "Thuringwethil", "Fell Beast (named)", "Daelosha", "Erna Sarah", "Shelob", "Caran-Carach", "Carcharoth", "Drauguin"]
 };
