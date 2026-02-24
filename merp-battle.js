@@ -7,16 +7,42 @@
 // ============================================================
 App._npcAttackTable = function(attackType) {
     const type = (attackType || "Weapon").toLowerCase();
+
+    // Manufactured weapons
     if (type === "weapon") return { attackTable: "AT1", fumbleTable: 1, primaryCrit: "Slash" };
     if (type === "missile") return { attackTable: "AT4", fumbleTable: 2, primaryCrit: "Puncture" };
     if (type === "spell" || type === "weapon/spell") return { attackTable: "AT9", fumbleTable: 3, primaryCrit: "Heat" };
-    if (type === "grapple") return { attackTable: "AT6", fumbleTable: 1, primaryCrit: "Grapple" };
-    if (type.includes("bite") || type.includes("claw") || type.includes("sting"))
-        return { attackTable: "AT5", fumbleTable: 1, primaryCrit: "Puncture" };
-    if (type.includes("crush") || type.includes("hoof") || type.includes("tusk") ||
-        type.includes("horn") || type.includes("antler"))
+
+    // Natural attacks — all use AT5 (Tooth & Claw) but with correct critical types
+    // per Rolemaster Arms Law & Claw Law attack table notes:
+    // 11.1.1 Beak/Pincher → P (Puncture)
+    // 11.1.2 Bite → P (Puncture), secondary S (Slash)
+    // 11.1.3 Claw/Talon → S (Slash) + P (Puncture) mixed
+    // 11.1.4 Grapple/Grasp/Envelop/Swallow → G (Grapple)
+    // 11.1.5 Horn/Tusk → P (Puncture), secondary U (Unbalance) + K (Crush)
+    // 11.1.6 Ram/Butt/Bash/Knock Down/Slug → U (Unbalance), secondary K (Crush)
+    // 11.1.7 Stinger → P (Puncture) + poison
+    // 11.1.9 Trample/Stomp → K (Crush)
+    // 11.2.1 Fall/Crush → K (Crush)
+    if (type.includes("grapple") || type.includes("swallow") || type.includes("envelop"))
+        return { attackTable: "AT6", fumbleTable: 1, primaryCrit: "Grapple" };
+    if (type.includes("trample") || type.includes("stomp"))
         return { attackTable: "AT5", fumbleTable: 1, primaryCrit: "Crush" };
-    return { attackTable: "AT5", fumbleTable: 1, primaryCrit: "Slash" }; // fallback
+    if (type.includes("bash") || type.includes("ram") || type.includes("butt") || type.includes("knock"))
+        return { attackTable: "AT5", fumbleTable: 1, primaryCrit: "Unbalance" };
+    if (type.includes("horn") || type.includes("tusk"))
+        return { attackTable: "AT5", fumbleTable: 1, primaryCrit: "Puncture" };
+    if (type.includes("crush") || type.includes("hoof"))
+        return { attackTable: "AT5", fumbleTable: 1, primaryCrit: "Crush" };
+    if (type.includes("claw"))
+        return { attackTable: "AT5", fumbleTable: 1, primaryCrit: "Slash" };
+    if (type.includes("bite") || type.includes("beak") || type.includes("pinch"))
+        return { attackTable: "AT5", fumbleTable: 1, primaryCrit: "Puncture" };
+    if (type.includes("sting"))
+        return { attackTable: "AT5", fumbleTable: 1, primaryCrit: "Puncture" };
+
+    // Fallback for unknown natural attacks
+    return { attackTable: "AT5", fumbleTable: 1, primaryCrit: "Crush" };
 };
 
 App._npcFumbleTable = function(category) {
@@ -126,6 +152,7 @@ App.battleLoadState = function() {
                 if (!c.fumbleRange) c.fumbleRange = [1, 3];
                 if (c.fumbleTable === undefined) c.fumbleTable = 1;
                 if (c.isLargeCreature === undefined) c.isLargeCreature = false;
+                if (c.isSuperLargeCreature === undefined) c.isSuperLargeCreature = false;
                 // Spell attack fields backward compat
                 if (c.level === undefined) c.level = 1;
                 if (c.spellOB_AT7 === undefined) c.spellOB_AT7 = 0;
@@ -315,7 +342,10 @@ App.battleAddNPC = function(templateName, count) {
 
     // Auto-detect attack table from NPC attackType
     const atkInfo = this._npcAttackTable(npc.attackType);
-    const isLarge = (npc.size === "Large" || npc.size === "Huge");
+    // Use critType (from PDF's Size/Crit column) for large creature determination
+    // "Regular" = normal crit tables, "Large" = CT-10, "Huge" = CT-12 (Super Large)
+    const isLarge = (npc.critType === "Large" || npc.critType === "Huge");
+    const isSuperLarge = (npc.critType === "Huge");
 
     for (let i = 0; i < count; i++) {
         const suffix = count > 1 ? ` #${i + 1}` : '';
@@ -344,6 +374,7 @@ App.battleAddNPC = function(templateName, count) {
             fumbleRange: [1, 2],
             fumbleTable: atkInfo.fumbleTable,
             isLargeCreature: isLarge,
+            isSuperLargeCreature: isSuperLarge,
             parryDB: 0,
             // Spell attack fields
             level: npc.level || 1,
@@ -385,6 +416,7 @@ App.battleAddCustom = function(data) {
         fumbleRange: data.fumbleRange || [1, 3],
         fumbleTable: data.fumbleTable || 1,
         isLargeCreature: data.isLargeCreature || false,
+        isSuperLargeCreature: data.isSuperLargeCreature || false,
         parryDB: 0,
         // Spell attack fields
         level: data.level || 1,
@@ -1189,7 +1221,8 @@ App._battleResolveWeaponAttack = function(attackerId, c, target) {
         critResult = MERP.CombatResolver.resolveCritical({
             critType: c.primaryCrit || "Slash",
             severity: atkResult.criticalLetter,
-            isLargeCreature: target.isLargeCreature || false
+            isLargeCreature: target.isLargeCreature || false,
+            isSuperLargeCreature: target.isSuperLargeCreature || false
         });
     }
 
@@ -1306,7 +1339,8 @@ App._battleResolveBoltBall = function(attackerId, c, target, spellTable, spellOB
         critResult = MERP.CombatResolver.resolveCritical({
             critType: spellCritType,
             severity: atkResult.criticalLetter,
-            isLargeCreature: target.isLargeCreature || false
+            isLargeCreature: target.isLargeCreature || false,
+            isSuperLargeCreature: target.isSuperLargeCreature || false
         });
     }
 
@@ -1602,7 +1636,8 @@ App.battleResolveSecondaryCrit = function(attackerId, critType, severity, target
     const critResult = MERP.CombatResolver.resolveCritical({
         critType: critType,
         severity: severity,
-        isLargeCreature: target.isLargeCreature || false
+        isLargeCreature: target.isLargeCreature || false,
+        isSuperLargeCreature: target.isSuperLargeCreature || false
     });
 
     // Apply bonus hits from secondary crit
@@ -2182,7 +2217,8 @@ App.battleSimulate = function() {
                     const critResult = MERP.CombatResolver.resolveCritical({
                         critType: current.primaryCrit || "Slash",
                         severity: atkResult.criticalLetter,
-                        isLargeCreature: target.isLargeCreature || false
+                        isLargeCreature: target.isLargeCreature || false,
+                        isSuperLargeCreature: target.isSuperLargeCreature || false
                     });
                     totalDamage += (critResult.hits || 0);
                     critMsg = ` + ${atkResult.criticalLetter} ${current.primaryCrit} crit (${critResult.hits || 0} bonus)`;

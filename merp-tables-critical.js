@@ -260,6 +260,40 @@ MERP.CT11 = { name: "Large Creature Spell", entries: [
 ]};
 
 // ============================================================
+// CT-12: SUPER LARGE CREATURE CRITICAL STRIKE TABLE (8.1.5)
+// For "Huge" critType creatures (great dragons, balrogs, etc.)
+// Full table has columns: Normal, Magic, Mithril, Holy Arms, Slaying
+// Currently uses Normal column; weaponMaterial parameter reserved for future use
+// ============================================================
+MERP.CT12 = { name: "Super Large Creature", entries: [
+    [-999, 5, { hits: 10, text: "+10 hits, but your weapon breaks in half. Shoddy workmanship." }],
+    [6, 10, { hits: 2, text: "+2 hits." }],
+    [11, 20, { hits: 3, text: "+3 hits." }],
+    [21, 30, { hits: 4, text: "+4 hits." }],
+    [31, 40, { hits: 5, text: "+5 hits." }],
+    [41, 50, { hits: 6, text: "+6 hits." }],
+    [51, 65, { hits: 7, text: "+7 hits." }],
+    [66, 66, { hits: 20, text: "+20 hits." }],
+    [67, 70, { hits: 8, text: "+8 hits." }],
+    [71, 80, { hits: 9, text: "+9 hits." }],
+    [81, 90, { hits: 10, text: "+10 hits." }],
+    [91, 95, { hits: 15, text: "+15 hits." }],
+    [96, 98, { hits: 0, text: "Blow severs vein and artery. Foe is stunned for 12 rounds, drops, then dies. Awesome." }],
+    [99, 100, { hits: 0, text: "Blow shatters bone. +30 hits and 10 hits per round due to compound fracture. Foe is at -25." }],
+    [101, 150, { hits: 12, text: "Light wound. +12 hits. Foe bleeds at 1 hit per round. Add +10 to your next swing." }],
+    [151, 175, { hits: 20, text: "Blow cuts muscle and causes light wound. +20 hits. Foe is at -20 and takes 5 hits per round." }],
+    [176, 200, { hits: 15, text: "Blow cuts tendons. +15 hits and Foe fights -25. Add +20 to your next swing." }],
+    [201, 250, { hits: 0, text: "Blow shatters bone. +35 hits. Foe takes 10 hits per round, is stunned 2 rounds, and fights at -30." }],
+    [251, 999, { hits: 20, text: "Foe is blinded. +20 hits and foe fights at -100. Foe is stunned and unable to parry for 6 rounds." }]
+]};
+
+// Super Large Creature table with all weapon material columns for future use
+MERP.CT12_byMaterial = {
+    normal: "CT12",  // Current default
+    // magic, mithril, holyArms, slaying columns can be added as CT12M, CT12Mi, CT12H, CT12S
+};
+
+// ============================================================
 // CRITICAL TABLE LOOKUP FUNCTION
 // ============================================================
 MERP.criticalTables = {
@@ -268,7 +302,8 @@ MERP.criticalTables = {
     "Grapple": "CT5", "Grappling": "CT5",
     "Heat": "CT6", "Cold": "CT7",
     "Electricity": "CT8", "Impact": "CT9",
-    "Large Creature": "CT10", "Large Spell": "CT11"
+    "Large Creature": "CT10", "Large Spell": "CT11",
+    "Super Large Creature": "CT12"
 };
 
 MERP.lookupCritical = function(critType, roll) {

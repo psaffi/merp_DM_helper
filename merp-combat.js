@@ -128,7 +128,8 @@ MERP.CombatResolver = {
             severity = "C",        // A, B, C, D, E
             roll = null,           // Manual roll (null = auto)
             weaponName = null,     // For determining crit type from weapon
-            isLargeCreature = false
+            isLargeCreature = false,
+            isSuperLargeCreature = false
         } = params;
 
         // Determine critical type
@@ -137,10 +138,14 @@ MERP.CombatResolver = {
             actualCritType = MERP.weapons[weaponName].primaryCrit;
         }
 
-        // Use large creature table if applicable
+        // Use large/super-large creature table if applicable
+        // Physical crits (Slash, Puncture, Crush, Unbalance, Grapple) → Large Creature or Super Large Creature
+        // Spell crits (Heat, Cold, Electricity, Impact) → Large Spell
         if (isLargeCreature) {
-            if (actualCritType === "Slash" || actualCritType === "Puncture" || actualCritType === "Crush") {
-                actualCritType = "Large Creature";
+            if (actualCritType === "Slash" || actualCritType === "Puncture" ||
+                actualCritType === "Crush" || actualCritType === "Unbalance" ||
+                actualCritType === "Grapple") {
+                actualCritType = isSuperLargeCreature ? "Super Large Creature" : "Large Creature";
             } else {
                 actualCritType = "Large Spell";
             }
