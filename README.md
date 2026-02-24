@@ -2,6 +2,8 @@
 
 A browser-based Game Master assistant for **Middle-earth Role Playing (MERP) 2nd Edition** by Iron Crown Enterprises (ICE). No server required -- just open `index.html` in any modern browser.
 
+To download on GitHub, click on the Green button for Code and select Download as a ZIP file.
+
 ## Features
 
 ### Character Management
